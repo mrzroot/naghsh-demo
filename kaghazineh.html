@@ -1,0 +1,1310 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Naghsh Paper Boutique</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..700&family=IBM+Plex+Mono:wght@400;500&family=Vazirmatn:wght@300..900&display=swap">
+<style>
+/* Layout: NAGHSH system (warm paper, ink, signal red). Shop-first: arched slider hero, trust row, category bento, sidebar catalogue, editorial abri story, print gateway; services as a second view with live tiered quote. */
+:root{
+  --bg:#F5F2EC; --surface:#EBE5DA; --surface-2:#E2DACB; --card:#FFFFFF; --ink:#141312; --ink-2:#6A645B; --ink-3:#9A9388;
+  --line:rgba(20,19,18,.10); --line-2:rgba(20,19,18,.18); --red:#D7263D; --red-soft:rgba(215,38,61,.10); --gold:#B08A4E;
+  --invert:#141312; --on-invert:#F5F2EC; --on-invert-2:#A7A097;
+  --f-fa:'Vazirmatn',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;
+  --f-serif:'Bodoni Moda',Georgia,'Times New Roman',serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  --r-xl:28px; --r-l:20px; --r-m:14px; --ease:cubic-bezier(.2,.7,.2,1);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12110F; --surface:#1C1A17; --surface-2:#25221E; --card:#1A1815; --ink:#F2EEE7; --ink-2:#ABA398; --ink-3:#7E776D;
+  --line:rgba(242,238,231,.10); --line-2:rgba(242,238,231,.20); --red:#F04B5E; --red-soft:rgba(240,75,94,.14); --gold:#D3B079;
+  --invert:#F2EEE7; --on-invert:#141312; --on-invert-2:#5E584F; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#12110F; --surface:#1C1A17; --surface-2:#25221E; --card:#1A1815; --ink:#F2EEE7; --ink-2:#ABA398; --ink-3:#7E776D;
+  --line:rgba(242,238,231,.10); --line-2:rgba(242,238,231,.20); --red:#F04B5E; --red-soft:rgba(240,75,94,.14); --gold:#D3B079;
+  --invert:#F2EEE7; --on-invert:#141312; --on-invert-2:#5E584F; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-fa);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg)}
+h1,h2,h3,h4{margin:0;line-height:1.25;text-wrap:balance;font-weight:800;letter-spacing:-.01em}
+:root[lang="en"] h1,:root[lang="en"] h2{font-family:var(--f-serif);font-weight:600;letter-spacing:-.015em}
+p{margin:0} a{color:inherit;text-decoration:none} img{max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1320px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.lat{font-family:var(--f-fa);font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;direction:ltr;unicode-bidi:isolate}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--red)}
+.eyebrow::after{content:"";width:36px;height:1px;background:currentColor}
+.mono{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;direction:ltr;unicode-bidi:isolate}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--ink-2)}
+section{position:relative}
+.sec{padding-block:clamp(56px,8vw,104px)}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:clamp(28px,4vw,44px)}
+.sec-head h2{font-size:clamp(28px,3.6vw,46px);margin-top:10px}
+.sec-head p{max-width:46ch;color:var(--ink-2)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;border:1px solid var(--ink);background:transparent;font-weight:700;font-size:14.5px;transition:background .25s,color .25s,border-color .25s,transform .25s var(--ease);white-space:nowrap}
+.btn svg{width:16px;height:16px;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(-4px)}
+:root[dir="ltr"] .btn svg{transform:scaleX(-1)} :root[dir="ltr"] .btn:hover svg{transform:scaleX(-1) translateX(-4px)}
+.btn.dark{background:var(--ink);color:var(--bg)}
+.btn.dark:hover{background:var(--red);border-color:var(--red);color:#fff}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff}
+.btn.red:hover{filter:brightness(1.08)}
+.btn.line:hover{background:var(--ink);color:var(--bg)}
+.btn.sm{min-height:42px;padding:0 18px;font-size:13.5px}
+.btn.block{width:100%}
+.ibtn{width:44px;height:44px;border-radius:50%;display:inline-grid;place-items:center;border:1px solid transparent;background:transparent;position:relative;transition:border-color .2s,background .2s}
+.ibtn:hover{border-color:var(--line-2)}
+.ibtn svg{width:20px;height:20px}
+.dot{position:absolute;top:4px;inset-inline-end:2px;min-width:18px;height:18px;border-radius:9px;background:var(--red);color:#fff;font-size:10.5px;font-weight:800;line-height:18px;text-align:center;padding:0 4px}
+
+/* topbar + header */
+.topbar{background:var(--invert);color:var(--on-invert);font-size:12px}
+.topbar .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:36px;gap:12px}
+.topbar .contact{display:flex;gap:18px;color:var(--on-invert-2)}
+.topbar .contact span{direction:ltr;unicode-bidi:isolate}
+.topbar .msg{text-align:center}
+.langs{justify-self:end;display:flex;gap:6px;align-items:center}
+.langs button{background:none;border:0;padding:2px 6px;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--on-invert-2)}
+.langs button[aria-pressed="true"]{color:var(--on-invert)}
+.langs i{width:1px;height:10px;background:var(--on-invert-2);opacity:.5}
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+.hbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:76px;gap:16px}
+.logo{display:grid;justify-items:center;line-height:1;text-align:center}
+.logo b{font-family:var(--f-serif);font-weight:700;font-size:26px;letter-spacing:.32em;margin-inline-end:-.32em;direction:ltr}
+.logo small{font-size:11px;color:var(--ink-2);margin-top:7px;letter-spacing:.02em}
+nav.main{display:flex;gap:2px;align-items:center}
+nav.main>a,nav.main>.has-mega>button{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border-radius:999px;font-size:14px;font-weight:600;background:none;border:0}
+nav.main>a:hover,nav.main>.has-mega>button:hover{background:var(--surface)}
+nav.main a[aria-current="page"]{color:var(--red)}
+nav.main svg{width:12px;height:12px}
+.has-mega{position:static}
+[hidden]{display:none!important}
+nav.main a.door{border:1px solid var(--red);color:var(--red);margin-inline-start:8px}
+nav.main a.door:hover{background:var(--red);color:#fff}
+.doorlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.doorlist li{display:flex;align-items:center;gap:12px;border:1px solid color-mix(in srgb,var(--on-invert) 16%,transparent);border-radius:var(--r-m);padding:16px;font-weight:700;font-size:14.5px}
+.doorlist svg{width:22px;height:22px;color:var(--red);flex:none}
+@media (max-width:480px){ .doorlist{grid-template-columns:1fr} }
+.mega{position:absolute;inset-inline:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(0,0,0,.25);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .25s,transform .25s var(--ease),visibility .25s}
+.has-mega:hover .mega,.has-mega:focus-within .mega,.has-mega.open .mega{opacity:1;visibility:visible;transform:none}
+.mega .wrap{display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:28px;padding-block:28px 32px}
+.mega ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.mega li a,.mega li button{display:flex;justify-content:space-between;align-items:center;width:100%;padding:10px 12px;border-radius:10px;background:none;border:0;font-size:14.5px;font-weight:600;text-align:start}
+.mega li a:hover,.mega li button:hover{background:var(--surface)}
+.mega li small{color:var(--ink-3);font-size:11px}
+.mega h4{font-size:12px;color:var(--ink-3);font-weight:600;margin:0 12px 8px}
+.mega .promo{border-radius:var(--r-l);background:var(--invert);color:var(--on-invert);padding:22px;display:grid;grid-template-columns:1fr 110px;gap:14px;align-items:center}
+.mega .promo p{color:var(--on-invert-2);font-size:13px;margin-block:6px 12px}
+.mega .promo .btn{border-color:var(--on-invert);color:var(--on-invert)}
+.hacts{display:flex;align-items:center;gap:4px;justify-content:flex-end}
+.cart-pill{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 8px 0 18px;border:1px solid var(--ink);border-radius:999px;background:none;font-weight:700;font-size:14px;margin-inline-start:6px;transition:background .2s,color .2s}
+:root[dir="rtl"] .cart-pill{padding:0 18px 0 8px}
+.cart-pill:hover{background:var(--ink);color:var(--bg)}
+.cart-pill .n{min-width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:12.5px}
+.menu-btn{display:none}
+@media (max-width:980px){
+  .topbar .contact{display:none} .topbar .wrap{grid-template-columns:1fr auto}
+  .topbar .msg{text-align:start;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  nav.main{display:none} .menu-btn{display:inline-grid}
+  .hbar{grid-template-columns:auto 1fr auto;min-height:64px}
+  .logo b{font-size:21px} .logo small{display:none}
+  .cart-pill .t,.hide-sm{display:none} .cart-pill{padding:0 6px!important;height:44px}
+}
+
+/* hero slider */
+.hero-wrap{padding-block:18px 0}
+.hero{position:relative;display:grid;border-radius:var(--r-xl);background:var(--surface);overflow:hidden;isolation:isolate}
+.slide{grid-area:1/1;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:clamp(24px,4vw,64px);padding:clamp(40px,5vw,72px) clamp(24px,5vw,80px) clamp(96px,8vw,112px);opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility 0s .35s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .6s var(--ease) .25s,visibility 0s}
+.slide .copy{display:grid;gap:22px;justify-items:start;max-width:560px}
+.slide .copy>*{transition:transform .9s var(--ease),opacity .9s var(--ease)}
+.slide:not(.on) .copy>*{transform:translateY(14px);opacity:.0}
+.slide .copy>*:nth-child(2){transition-delay:.06s}.slide .copy>*:nth-child(3){transition-delay:.12s}.slide .copy>*:nth-child(4){transition-delay:.18s}
+.slide h1{font-size:clamp(38px,5.6vw,74px);line-height:1.12}
+.slide h1 em{font-style:normal;color:var(--red)}
+:root[lang="en"] .slide h1 em{font-style:italic}
+.slide .lede{font-size:clamp(15px,1.3vw,17px);color:var(--ink-2);max-width:44ch}
+.slide .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.note{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--ink-2)}
+.note svg{width:16px;height:16px}
+.visual{position:relative;justify-self:center;width:min(100%,440px)}
+.arch{position:relative;aspect-ratio:4/5;max-width:100%;border-radius:999px 999px 22px 22px;overflow:hidden;background:var(--surface-2);box-shadow:0 40px 80px -40px rgba(0,0,0,.45)}
+.arch canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:crosshair}
+.arch>svg{position:absolute;inset:0;width:100%;height:100%}
+.float{position:absolute;filter:drop-shadow(0 26px 30px rgba(0,0,0,.28));pointer-events:none}
+.float svg{display:block;width:100%;height:auto}
+.badge-rot{position:absolute;width:118px;height:118px;top:6%;inset-inline-end:-26px;animation:spin 22s linear infinite;color:var(--ink)}
+.badge-rot svg{width:100%;height:100%}
+.badge-rot b{position:absolute;inset:0;display:grid;place-items:center;animation:spin 22s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.chip{position:absolute;background:var(--card);color:var(--ink);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700;box-shadow:0 14px 30px -14px rgba(0,0,0,.35);white-space:nowrap}
+.chip small{display:block;font-weight:500;color:var(--ink-2);font-size:11px}
+.chip.red{background:var(--red);color:#fff}
+.hint{position:absolute;bottom:14px;inset-inline:14px;display:flex;justify-content:center;pointer-events:none}
+.hint span{background:rgba(20,19,18,.72);color:#F5F2EC;font-size:11.5px;padding:5px 12px;border-radius:999px;backdrop-filter:blur(6px)}
+.hctrl{position:absolute;bottom:clamp(26px,3vw,36px);inset-inline:clamp(24px,5vw,80px);display:flex;align-items:center;gap:22px;z-index:2}
+.bars{display:flex;gap:8px}
+.bars button{width:46px;height:20px;background:none;border:0;padding:0;position:relative}
+.bars button::before,.bars button i{content:"";position:absolute;inset-inline:0;top:9px;height:2px;border-radius:2px;background:var(--line-2)}
+.bars button i{background:var(--ink);transform:scaleX(0);transform-origin:var(--o,right)}
+:root[dir="ltr"] .bars button i{--o:left}
+.bars button.on i{animation:fill 7s linear forwards}
+.hero.paused .bars button.on i{animation-play-state:paused}
+@keyframes fill{to{transform:scaleX(1)}}
+.count{font-family:var(--f-mono);font-size:12.5px;color:var(--ink-2);direction:ltr}
+.count b{color:var(--ink)}
+.arrows{display:flex;gap:8px;margin-inline-start:auto}
+.arrows button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line-2);background:var(--card);display:grid;place-items:center}
+.arrows button:hover{background:var(--ink);color:var(--bg)}
+.arrows svg{width:16px;height:16px}
+:root[dir="ltr"] .arrows svg{transform:scaleX(-1)}
+@media (max-width:860px){
+  .slide{grid-template-columns:1fr;padding:22px 20px 92px;gap:26px}
+  .visual{order:-1;width:min(100%,330px)}
+  .arch{aspect-ratio:1/1.02}
+  .badge-rot{width:92px;height:92px;inset-inline-end:-8px}
+  .hctrl{inset-inline:20px}
+  .bars button{width:30px}
+}
+
+/* trust row */
+.trust{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r-l);margin-top:14px;background:var(--card)}
+.trust div{display:flex;gap:14px;align-items:center;padding:20px 22px}
+.trust div+div{border-inline-start:1px solid var(--line)}
+.trust svg{width:26px;height:26px;flex:none;color:var(--red)}
+.trust b{display:block;font-size:14.5px}
+.trust span{font-size:12.5px;color:var(--ink-2);line-height:1.5;display:block}
+@media (max-width:900px){ .trust{grid-template-columns:1fr 1fr} .trust div:nth-child(3){border-inline-start:0} .trust div:nth-child(n+3){border-top:1px solid var(--line)} }
+@media (max-width:480px){ .trust div{padding:14px;gap:10px} .trust svg{width:22px;height:22px} }
+
+/* category bento */
+.bento{display:grid;grid-template-columns:1.25fr 1fr 1fr;grid-template-rows:repeat(2,minmax(230px,auto));gap:16px}
+.tile{position:relative;border-radius:var(--r-l);background:var(--surface);overflow:hidden;padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:230px;text-align:start;border:0;isolation:isolate}
+.tile:first-child{grid-row:span 2;background:#1D2C4A;color:#F5F0E4}
+.tile .art{position:absolute;inset-block-end:-6%;inset-inline-end:-6%;width:62%;transition:transform .7s var(--ease);z-index:-1}
+.tile:first-child .art{width:88%;inset-inline-end:-10%;inset-block-end:-8%}
+.tile:hover .art{transform:scale(1.06) rotate(-2deg)}
+.tile h3{font-size:clamp(20px,2vw,26px);margin-top:6px}
+.tile:first-child h3{font-size:clamp(28px,3vw,40px)}
+.tile .lat{color:var(--ink-3)} .tile:first-child .lat{color:#D7B877}
+.tile .go{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700}
+.tile .go i{width:38px;height:38px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;font-style:normal;transition:background .25s,color .25s}
+.tile:hover .go i{background:var(--red);border-color:var(--red);color:#fff}
+.tile .go svg{width:14px;height:14px} :root[dir="ltr"] .tile .go svg{transform:scaleX(-1)}
+.tile:first-child p{color:#C9C3B2;max-width:30ch;margin-top:10px}
+@media (max-width:860px){ .bento{grid-template-columns:1fr 1fr;grid-template-rows:auto} .tile:first-child{grid-column:span 2;grid-row:auto;min-height:300px} }
+@media (max-width:460px){ .tile{min-height:190px;padding:18px} .tile .art{width:70%} }
+
+/* catalogue */
+.cat-layout{display:grid;grid-template-columns:250px 1fr;gap:clamp(20px,3vw,44px);align-items:start}
+.side{position:sticky;top:110px;display:grid;gap:2px}
+.side button{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;text-align:start;background:none;border:0;border-bottom:1px solid var(--line);padding:12px 4px}
+.side button .lat{font-size:10px;color:var(--ink-3)}
+.side button b{font-size:15px;font-weight:700;grid-column:1}
+.side button .mono{grid-row:1/3;grid-column:2;color:var(--ink-3)}
+.side button[aria-pressed="true"] b,.side button[aria-pressed="true"] .mono,.side button[aria-pressed="true"] .lat{color:var(--red)}
+.side button:hover b{color:var(--red)}
+.toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
+.toolbar .muted{font-size:13.5px}
+.tools{display:flex;gap:8px;align-items:center}
+.seg-sm{display:inline-flex;border:1px solid var(--line-2);border-radius:999px;padding:3px}
+.seg-sm button{border:0;background:none;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600}
+.seg-sm button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+select{appearance:none;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat;background-position:left 14px center;border:1px solid var(--line-2);border-radius:999px;padding:9px 18px 9px 38px;min-height:42px;font-size:13.5px}
+:root[dir="ltr"] select{background-position:right 14px center;padding:9px 38px 9px 18px}
+.chips{display:none;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;padding-bottom:2px}
+.chips button{white-space:nowrap;border:1px solid var(--line-2);background:none;border-radius:999px;padding:7px 16px;font-size:13.5px;font-weight:600}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+@media (max-width:900px){ .cat-layout{grid-template-columns:1fr} .side{display:none} .chips{display:flex} }
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 20px}
+@media (max-width:1100px){ .grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:900px){ .grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (max-width:700px){ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 12px} }
+.card{display:grid;gap:12px;align-content:start;min-width:0}
+.pic{position:relative;aspect-ratio:1/1.08;max-width:100%;border-radius:var(--r-l);overflow:hidden;background:color-mix(in srgb,var(--tint) 14%,var(--surface));isolation:isolate}
+.pic .open{position:absolute;inset:0;border:0;background:none;padding:0;display:grid;place-items:center;border-radius:inherit}
+.pic svg.art{width:86%;height:86%;transition:transform .8s var(--ease)}
+.card:hover .pic svg.art{transform:translateY(-6px) scale(1.04) rotate(-1.5deg)}
+.flag{position:absolute;top:14px;inset-inline-start:14px;font-size:11.5px;font-weight:700;padding:3px 11px;border-radius:999px;background:var(--ink);color:var(--bg);z-index:1}
+.flag.red{background:var(--red);color:#fff}
+.heart{position:absolute;top:10px;inset-inline-end:10px;z-index:1;background:color-mix(in srgb,var(--card) 80%,transparent);backdrop-filter:blur(6px)}
+.heart svg{width:18px;height:18px}
+.heart[aria-pressed="true"] svg{fill:var(--red);stroke:var(--red)}
+.quick{position:absolute;inset-inline:12px;bottom:12px;z-index:1;transform:translateY(calc(100% + 16px));transition:transform .35s var(--ease);min-height:46px}
+.card:hover .quick,.card:focus-within .quick{transform:none}
+@media (hover:none){ .quick{transform:none;inset-inline:auto;inset-inline-end:10px;bottom:10px;width:44px;min-height:44px;padding:0;border-radius:50%} .quick span{display:none} }
+.card .meta{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.card .meta .lat{font-size:10px;color:var(--ink-3);letter-spacing:.16em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card .meta .mono{color:var(--red);flex:none}
+.card h3{font-size:15.5px;font-weight:700;line-height:1.5}
+.card .price{font-weight:800;font-size:15px}
+.card .price small{font-weight:500;color:var(--ink-2);font-size:12px}
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 10px;color:var(--ink-2);border:1px dashed var(--line-2);border-radius:var(--r-l)}
+
+/* editorial */
+.edit{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,80px);align-items:center}
+.edit .arch{max-width:460px;justify-self:center;width:100%}
+.edit .txt{display:grid;gap:18px;max-width:58ch}
+.edit h2{font-size:clamp(30px,4vw,52px)}
+.edit p{color:var(--ink-2)}
+.steps{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
+.steps li{display:grid;grid-template-columns:44px 1fr;gap:14px;padding-block:16px;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps .mono{color:var(--red);font-size:13px;padding-top:2px}
+.steps b{display:block;font-size:15.5px}
+.steps span{color:var(--ink-2);font-size:14px}
+@media (max-width:860px){ .edit{grid-template-columns:1fr} .edit .arch{max-width:340px} }
+
+/* marquee */
+.marq{background:var(--invert);color:var(--on-invert);overflow:hidden;padding-block:26px;border-radius:0}
+.marq .track{display:flex;gap:44px;width:max-content;animation:marq 38s linear infinite}
+:root[dir="rtl"] .marq .track{animation-name:marqr}
+.marq span{font-size:clamp(28px,4vw,52px);font-weight:900;white-space:nowrap;display:inline-flex;align-items:center;gap:44px}
+.marq span::after{content:"✦";font-size:.5em;color:var(--red)}
+.marq span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--on-invert)}
+@keyframes marq{to{transform:translateX(-50%)}} @keyframes marqr{to{transform:translateX(50%)}}
+
+/* print gateway */
+.gate{background:var(--invert);color:var(--on-invert);border-radius:var(--r-xl);padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,4vw,56px);align-items:center;overflow:hidden;position:relative}
+.gate h2{font-size:clamp(30px,4vw,50px);margin-top:12px}
+.gate p{color:var(--on-invert-2);margin-top:14px;max-width:44ch}
+.gate .btn{margin-top:26px}
+.gate .btn.line{border-color:var(--on-invert);color:var(--on-invert)}
+.gate .btn.line:hover{background:var(--on-invert);color:var(--invert)}
+.tiers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.tier{border:1px solid color-mix(in srgb,var(--on-invert) 16%,transparent);border-radius:var(--r-m);padding:18px 14px;display:grid;gap:4px;position:relative}
+.tier b{font-size:clamp(22px,2.4vw,30px);font-weight:900}
+.tier small{color:var(--on-invert-2);font-size:12px}
+.tier .rng{margin-top:12px;padding-top:10px;border-top:1px solid color-mix(in srgb,var(--on-invert) 14%,transparent);font-size:13px;font-weight:600}
+.tier.best{background:var(--red);border-color:var(--red);color:#fff}
+.tier.best small{color:rgba(255,255,255,.8)}
+.tier.best .rng{border-color:rgba(255,255,255,.3)}
+.tier .tag{position:absolute;top:-10px;inset-inline-end:12px;background:var(--on-invert);color:var(--invert);font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;letter-spacing:.1em}
+@media (max-width:960px){ .gate{grid-template-columns:1fr} }
+@media (max-width:560px){ .tiers{grid-template-columns:1fr 1fr} }
+
+/* faq */
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,4vw,64px);align-items:start}
+.faq .side-t{position:sticky;top:110px;display:grid;gap:14px}
+.faq .side-t h2{font-size:clamp(28px,3.6vw,44px)}
+.faq .call{display:inline-flex;gap:10px;align-items:center;font-weight:800;font-size:18px;direction:ltr}
+details{border-bottom:1px solid var(--line)}
+details:first-child{border-top:1px solid var(--line)}
+summary{list-style:none;display:grid;grid-template-columns:40px 1fr 28px;gap:10px;align-items:center;padding-block:20px;cursor:pointer;font-weight:700;font-size:15.5px}
+summary::-webkit-details-marker{display:none}
+summary .mono{color:var(--red)}
+summary i{width:28px;height:28px;border-radius:50%;border:1px solid var(--line-2);position:relative;transition:transform .3s var(--ease),background .2s}
+summary i::before,summary i::after{content:"";position:absolute;inset:50% 8px auto;height:1.5px;background:currentColor;transform:translateY(-50%)}
+summary i::after{transform:translateY(-50%) rotate(90deg);transition:transform .3s var(--ease)}
+details[open] summary i{background:var(--ink);color:var(--bg)}
+details[open] summary i::after{transform:translateY(-50%) rotate(0)}
+details p{padding:0 50px 22px 0;color:var(--ink-2);max-width:62ch}
+:root[dir="ltr"] details p{padding:0 0 22px 50px}
+@media (max-width:860px){ .faq{grid-template-columns:1fr} .faq .side-t{position:static} }
+
+/* newsletter */
+.news{border-radius:var(--r-xl);background:var(--surface);padding:clamp(28px,5vw,60px);display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;overflow:hidden;position:relative}
+.news h2{font-size:clamp(26px,3.4vw,42px)}
+.news form{display:flex;gap:8px;background:var(--card);border-radius:999px;padding:6px;border:1px solid var(--line)}
+.news input{flex:1;min-width:0;border:0;background:none;padding:0 18px;font-size:14.5px}
+.news input:focus{outline:none}
+.news .msg{grid-column:2;font-size:13px;margin-top:-16px}
+@media (max-width:800px){ .news{grid-template-columns:1fr} .news .msg{grid-column:1} }
+
+/* footer */
+footer.site{background:var(--invert);color:var(--on-invert);margin-top:clamp(56px,8vw,104px);overflow:hidden}
+footer .cols{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:36px;padding-block:64px 30px}
+footer h4{font-size:13px;margin-bottom:16px;color:var(--on-invert-2);font-weight:600}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:14px}
+footer a,footer button.lnk{color:var(--on-invert);opacity:.86;background:none;border:0;padding:0;text-align:start;font-size:14px}
+footer a:hover,footer button.lnk:hover{opacity:1;color:var(--red)}
+footer p{color:var(--on-invert-2);font-size:14px;max-width:38ch}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.copybtn{background:none;border:1px solid color-mix(in srgb,var(--on-invert) 25%,transparent);color:var(--on-invert);border-radius:999px;font-size:11px;padding:1px 9px;margin-inline-start:8px}
+.wordmark{font-family:var(--f-serif);font-weight:800;font-size:clamp(80px,19vw,280px);line-height:.8;letter-spacing:.06em;text-align:center;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--on-invert) 30%,transparent);direction:ltr;user-select:none;margin-bottom:-.12em;white-space:nowrap}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-block:20px;border-top:1px solid color-mix(in srgb,var(--on-invert) 12%,transparent);font-size:12.5px;color:var(--on-invert-2)}
+@media (max-width:900px){ footer .cols{grid-template-columns:1fr 1fr} footer .cols>div:first-child{grid-column:1/-1} }
+
+/* ===== services view ===== */
+.back{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--ink-2);margin-block:20px 14px}
+.back:hover{color:var(--red)}
+.back svg{width:14px;height:14px} :root[dir="ltr"] .back svg{transform:scaleX(-1)}
+.shero{border-radius:var(--r-xl);background:var(--surface);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(28px,5vw,72px);overflow:hidden}
+.shero h1{font-size:clamp(36px,5.2vw,68px);line-height:1.12}
+.shero h1 em{font-style:normal;color:var(--red)}
+.shero .copy{display:grid;gap:22px;justify-items:start}
+.shero .lede{color:var(--ink-2);max-width:46ch}
+@media (max-width:860px){ .shero{grid-template-columns:1fr} .shero .visual{order:-1;width:min(100%,320px)} }
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;background:var(--card)}
+.svc{padding:28px;display:grid;gap:10px;align-content:start;border-inline-start:1px solid var(--line);border-top:1px solid var(--line)}
+.svc:nth-child(3n+1){border-inline-start:0} .svc:nth-child(-n+3){border-top:0}
+.svc .top{display:flex;justify-content:space-between;align-items:center}
+.svc .top i{width:46px;height:46px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center}
+.svc .top svg{width:20px;height:20px}
+.svc .top .mono{color:var(--ink-3)}
+.svc .lat{color:var(--ink-3);margin-top:16px;font-size:10px}
+.svc h3{font-size:21px}
+.svc p{color:var(--ink-2);font-size:14px}
+.svc .foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:16px;margin-top:14px}
+.svc .foot b{font-size:19px;font-weight:900}
+.svc .foot small{font-size:12px;color:var(--ink-2);font-weight:500}
+.svc .foot button{background:none;border:0;color:var(--red);font-weight:700;font-size:13.5px;display:inline-flex;gap:6px;align-items:center}
+.svc .foot svg{width:14px;height:14px} :root[dir="ltr"] .svc .foot svg{transform:scaleX(-1)}
+@media (max-width:960px){ .svc-grid{grid-template-columns:1fr 1fr} .svc{border-inline-start:1px solid var(--line)!important;border-top:1px solid var(--line)!important} .svc:nth-child(odd){border-inline-start:0!important} .svc:nth-child(-n+2){border-top:0!important} }
+@media (max-width:600px){ .svc-grid{grid-template-columns:1fr} .svc{border-inline-start:0!important;border-top:1px solid var(--line)!important} .svc:first-child{border-top:0!important} }
+.quote{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;align-items:start}
+.qform{background:var(--card);border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(20px,3vw,36px);display:grid;gap:26px;min-width:0}
+.qgroup{display:grid;gap:12px}
+.qgroup>label,.qgroup>.lbl{font-size:13px;font-weight:700;color:var(--ink-2)}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.seg span{display:grid;gap:0;place-items:center;min-height:52px;min-width:86px;padding:8px 18px;border:1px solid var(--line-2);border-radius:var(--r-m);font-weight:700;font-size:14px;transition:background .2s,border-color .2s,color .2s;text-align:center;line-height:1.4}
+.seg span small{font-size:10px;letter-spacing:.14em;color:var(--ink-3);font-weight:600}
+.seg input:checked+span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.seg input:checked+span small{color:var(--on-invert-2)}
+.seg input:focus-visible+span{outline:2px solid var(--red);outline-offset:2px}
+.two-f{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stepper{display:flex;align-items:center;border:1px solid var(--line-2);border-radius:var(--r-m);overflow:hidden;height:52px}
+.stepper button{width:52px;height:100%;border:0;background:var(--surface);font-size:20px}
+.stepper input{flex:1;min-width:0;border:0;background:none;text-align:center;font-weight:800;font-size:16px;-moz-appearance:textfield}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.drop{display:flex;align-items:center;gap:14px;border:1.5px dashed var(--line-2);border-radius:var(--r-m);padding:16px 18px;cursor:pointer;transition:border-color .2s,background .2s}
+.drop:hover,.drop.over{border-color:var(--red);background:var(--red-soft)}
+.drop i{width:44px;height:44px;border-radius:50%;background:var(--surface);display:grid;place-items:center;flex:none}
+.drop svg{width:20px;height:20px}
+.drop b{display:block;font-size:14.5px}
+.drop small{color:var(--ink-2);font-size:12.5px}
+.drop .pick{margin-inline-start:auto;color:var(--red);font-weight:700;font-size:13.5px}
+.drop input{position:absolute;width:1px;height:1px;opacity:0}
+.summary{position:sticky;top:110px;background:var(--invert);color:var(--on-invert);border-radius:var(--r-xl);padding:28px;display:grid;gap:14px}
+.summary .lat{color:var(--on-invert-2)}
+.summary .stp{display:flex;justify-content:space-between;align-items:center}
+.summary .stp span{font-size:12px;color:var(--on-invert-2)}
+.srow{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding-block:9px;border-bottom:1px solid color-mix(in srgb,var(--on-invert) 12%,transparent)}
+.srow span{color:var(--on-invert-2)}
+.srow b{font-weight:700;text-align:end}
+.pay{display:grid;gap:4px;margin-top:6px}
+.pay span{font-size:13px;color:var(--on-invert-2)}
+.pay b{font-size:clamp(28px,3vw,36px);font-weight:900;line-height:1.2}
+.up{background:color-mix(in srgb,var(--red) 18%,transparent);border-radius:var(--r-m);padding:12px 14px;font-size:13px;line-height:1.7}
+.up b{color:var(--red)}
+.summary .btn.red{margin-top:6px}
+.summary .note{color:var(--on-invert-2);font-size:12px;justify-content:center}
+.fields{display:grid;gap:10px}
+.inp{width:100%;background:color-mix(in srgb,var(--on-invert) 8%,transparent);border:1px solid color-mix(in srgb,var(--on-invert) 16%,transparent);border-radius:var(--r-m);padding:12px 14px;color:var(--on-invert);font-size:14px}
+.inp::placeholder{color:var(--on-invert-2)}
+@media (max-width:960px){ .quote{grid-template-columns:1fr} .summary{position:static} }
+@media (max-width:520px){ .two-f{grid-template-columns:1fr} .seg span{min-width:0;padding:8px 14px} .drop .pick{display:none} }
+.ptable{background:var(--card);border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden}
+.ptable .head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:620px;font-size:14.5px}
+th,td{padding:18px 22px;text-align:center;border-bottom:1px solid var(--line)}
+th{font-size:12.5px;color:var(--ink-2);font-weight:600}
+th:first-child,td:first-child{text-align:start}
+td:first-child b{display:block}
+td:first-child small{font-size:10.5px;letter-spacing:.14em;color:var(--ink-3)}
+tr:last-child td{border-bottom:0}
+.bestcol{background:var(--red-soft);color:var(--red);font-weight:800}
+th.bestcol span{display:block;font-size:10px;letter-spacing:.12em}
+.b2b{border-radius:var(--r-xl);background:var(--surface);padding:clamp(28px,5vw,60px);display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+.b2b h2{font-size:clamp(26px,3.4vw,42px);margin-top:12px}
+.b2b p{color:var(--ink-2);margin-top:12px;max-width:56ch}
+.b2b ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.b2b li{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:var(--r-m);padding:14px 16px;font-weight:600;font-size:14.5px}
+.b2b li svg{width:20px;height:20px;color:var(--red);flex:none}
+@media (max-width:860px){ .b2b{grid-template-columns:1fr} }
+
+/* dialogs */
+dialog{border:0;padding:0;background:var(--bg);color:var(--ink);max-width:calc(100% - 24px);max-height:calc(100% - 24px)}
+dialog::backdrop{background:rgba(10,9,8,.5);backdrop-filter:blur(3px)}
+dialog[open]{animation:pop .35s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.qv{width:min(980px,100%);border-radius:var(--r-xl);overflow:auto}
+.qv .in{display:grid;grid-template-columns:1.05fr .95fr}
+.qv .pic{border-radius:0;aspect-ratio:auto;min-height:100%}
+.qv .pic svg.art{width:78%;height:auto;max-height:90%}
+.qv .body{padding:clamp(22px,3vw,40px);display:grid;gap:16px;align-content:start}
+.qv h2{font-size:clamp(24px,2.6vw,32px)}
+.qv .price{font-size:26px;font-weight:900}
+.qv .specs{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:13.5px;border-block:1px solid var(--line);padding-block:14px}
+.qv .specs span{color:var(--ink-2)}
+.qv .x{position:absolute;top:14px;inset-inline-end:14px;background:var(--card);z-index:2}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line-2);border-radius:999px;height:52px}
+.qty button{width:46px;height:100%;border:0;background:none;font-size:18px}
+.qty output{min-width:30px;text-align:center;font-weight:800}
+.qty.sm{height:36px} .qty.sm button{width:34px;font-size:15px}
+.rowb{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.perks{display:grid;gap:8px;font-size:13px;color:var(--ink-2)}
+.perks div{display:flex;gap:10px;align-items:center}
+.perks svg{width:16px;height:16px;color:var(--red);flex:none}
+@media (max-width:760px){ .qv .in{grid-template-columns:1fr} .qv .pic{min-height:0;aspect-ratio:4/3} }
+.drawer{margin:0;margin-inline-start:auto;height:100%;max-height:100%;width:min(440px,100%);max-width:100%;display:none;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer[open]{display:flex;animation:slide .4s var(--ease)}
+.drawer.start{margin-inline-start:0;margin-inline-end:auto}
+@keyframes slide{from{transform:translateX(var(--from,100%))}}
+:root[dir="rtl"] .drawer{--from:-100%} :root[dir="rtl"] .drawer.start{--from:100%} :root[dir="ltr"] .drawer.start{--from:-100%}
+.dhead{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}
+.dhead h2{font-size:20px}
+.dbody{flex:1;overflow-y:auto;padding:6px 22px}
+.dfoot{padding:18px 22px;border-top:1px solid var(--line);display:grid;gap:12px}
+.line{display:grid;grid-template-columns:76px 1fr auto;gap:14px;align-items:center;padding-block:14px;border-bottom:1px solid var(--line)}
+.line .pic{aspect-ratio:1/1;border-radius:var(--r-m)}
+.line .pic svg.art{width:90%;height:90%}
+.line b{font-size:14px;display:block;line-height:1.5}
+.line small{color:var(--ink-2);font-size:12px}
+.line .rm{background:none;border:0;color:var(--ink-3);font-size:12px;padding:0;text-decoration:underline}
+.line .rm:hover{color:var(--red)}
+.ship-bar{display:grid;gap:8px;font-size:12.5px;color:var(--ink-2)}
+.ship-bar i{height:4px;border-radius:4px;background:var(--surface-2);overflow:hidden;display:block}
+.ship-bar i b{display:block;height:100%;background:var(--red);border-radius:inherit;transition:width .4s var(--ease)}
+.tot{display:flex;justify-content:space-between;align-items:baseline}
+.tot b{font-size:22px;font-weight:900}
+.empty{display:grid;gap:16px;justify-items:center;text-align:center;padding:60px 10px;color:var(--ink-2)}
+.empty svg{width:64px;height:64px;color:var(--ink-3)}
+.ok{border:1px solid var(--red);background:var(--red-soft);border-radius:var(--r-m);padding:14px 16px;font-size:14px;color:var(--ink)}
+.field{display:grid;gap:6px}
+.field label{font-size:13px;font-weight:600;color:var(--ink-2)}
+.field input,.field textarea{width:100%;border:1px solid var(--line-2);background:var(--card);border-radius:var(--r-m);padding:12px 14px;font-size:14.5px}
+.err{color:var(--red);font-size:13px}
+.search{width:min(720px,100%);border-radius:var(--r-xl);margin-top:8vh}
+.search .bar{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.search .bar svg{width:22px;height:22px;color:var(--ink-3)}
+.search input{flex:1;border:0;background:none;font-size:18px;font-weight:600;min-width:0}
+.search input:focus{outline:none}
+.res{max-height:60vh;overflow-y:auto;padding:8px}
+.res button{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;width:100%;padding:8px;border:0;background:none;border-radius:var(--r-m);text-align:start}
+.res button:hover,.res button:focus-visible{background:var(--surface)}
+.res .pic{aspect-ratio:1/1;border-radius:12px}
+.res .pic svg.art{width:90%;height:90%}
+.res .hintx{padding:22px;color:var(--ink-2);font-size:14px}
+.mnav{display:grid;gap:2px;padding:10px 22px}
+.mnav a,.mnav button{display:flex;justify-content:space-between;align-items:center;padding:16px 4px;border:0;border-bottom:1px solid var(--line);background:none;font-size:17px;font-weight:700;text-align:start}
+.mnav small{color:var(--ink-3);font-size:12px;font-weight:500}
+.toast{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom,0px));left:50%;translate:-50% 0;background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:999px;font-size:14px;font-weight:600;z-index:60;transition:opacity .3s,transform .3s var(--ease);display:flex;gap:10px;align-items:center;max-width:calc(100% - 32px);box-shadow:0 20px 40px -20px rgba(0,0,0,.5)}
+.toast[data-off]{opacity:0;transform:translateY(12px);pointer-events:none}
+.toast button{background:none;border:0;color:var(--red);font-weight:800;padding:0}
+
+@supports (animation-timeline: view()){
+  .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+  @keyframes rv{from{opacity:.35;transform:translateY(28px)}}
+}
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} html{scroll-behavior:auto} }
+</style>
+
+<!-- shared SVG paint: lighting, gold, textures, tazhib medallion -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+  <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+  <linearGradient id="lit" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".25"/><stop offset=".09" stop-color="#fff" stop-opacity=".22"/><stop offset=".45" stop-color="#fff" stop-opacity=".02"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient>
+  <linearGradient id="litV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></linearGradient>
+  <linearGradient id="cyl" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset=".3" stop-color="#fff" stop-opacity=".28"/><stop offset=".55" stop-color="#fff" stop-opacity=".04"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6E1A6"/><stop offset=".4" stop-color="#C69A48"/><stop offset=".65" stop-color="#EDCF83"/><stop offset="1" stop-color="#94692A"/></linearGradient>
+  <linearGradient id="pageEdge" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#F8F4EA"/><stop offset="1" stop-color="#E4DCCB"/></linearGradient>
+  <pattern id="pDots" width="11" height="11" patternUnits="userSpaceOnUse"><circle cx="5.5" cy="5.5" r="1.1" fill="#fff" fill-opacity=".5"/></pattern>
+  <pattern id="pWeave" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M0 .5h4M0 2.5h4" stroke="#fff" stroke-opacity=".09"/><path d="M.5 0v4M2.5 0v4" stroke="#000" stroke-opacity=".08"/></pattern>
+  <pattern id="pGrain" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".6" fill="#000" fill-opacity=".08"/><circle cx="4" cy="3.5" r=".5" fill="#fff" fill-opacity=".07"/><circle cx="2.5" cy="5" r=".4" fill="#000" fill-opacity=".06"/></pattern>
+  <pattern id="pLines" width="10" height="9" patternUnits="userSpaceOnUse"><path d="M0 8.5h10" stroke="#8796AE" stroke-opacity=".55" stroke-width=".7"/></pattern>
+  <pattern id="pLily" width="30" height="30" patternUnits="userSpaceOnUse"><g fill="url(#gold)"><ellipse cx="15" cy="9.5" rx="2.2" ry="5"/><ellipse cx="10" cy="15" rx="5" ry="2.2"/><ellipse cx="20" cy="15" rx="5" ry="2.2"/><path d="M13.6 17h2.8l-1.4 6z"/><circle cx="0" cy="0" r="1.8"/><circle cx="30" cy="0" r="1.8"/><circle cx="0" cy="30" r="1.8"/><circle cx="30" cy="30" r="1.8"/></g></pattern>
+  <pattern id="pFlor" width="36" height="36" patternUnits="userSpaceOnUse"><rect width="36" height="36" fill="#F3E9DF"/><g fill="#C8423F"><circle cx="9" cy="9" r="3.2"/><circle cx="27" cy="27" r="3.2"/></g><g fill="#2F6B5C"><ellipse cx="15" cy="9" rx="3" ry="1.4"/><ellipse cx="9" cy="15" rx="1.4" ry="3"/><ellipse cx="21" cy="27" rx="3" ry="1.4"/><ellipse cx="27" cy="21" rx="1.4" ry="3"/></g><g fill="#E0A93F"><circle cx="27" cy="9" r="1.6"/><circle cx="9" cy="27" r="1.6"/></g></pattern>
+  <pattern id="pTaz" width="44" height="44" patternUnits="userSpaceOnUse"><g fill="none" stroke="url(#gold)" stroke-width="1"><circle cx="22" cy="22" r="9"/><path d="M22 4c6 6 6 12 0 18-6-6-6-12 0-18zM22 40c6-6 6-12 0-18-6 6-6 12 0 18zM4 22c6-6 12-6 18 0-6 6-12 6-18 0zM40 22c-6-6-12-6-18 0 6 6 12 6 18 0z"/></g><circle cx="22" cy="22" r="2.2" fill="url(#gold)"/><circle cx="0" cy="0" r="3" fill="url(#gold)"/><circle cx="44" cy="0" r="3" fill="url(#gold)"/><circle cx="0" cy="44" r="3" fill="url(#gold)"/><circle cx="44" cy="44" r="3" fill="url(#gold)"/></pattern>
+  <symbol id="shamseh" viewBox="-50 -50 100 100">
+    <g fill="url(#gold)">
+      <path id="pet" d="M0-48c7 10 7 20 0 28-7-8-7-18 0-28z"/>
+      <use href="#pet" transform="rotate(22.5)"/><use href="#pet" transform="rotate(45)"/><use href="#pet" transform="rotate(67.5)"/><use href="#pet" transform="rotate(90)"/><use href="#pet" transform="rotate(112.5)"/><use href="#pet" transform="rotate(135)"/><use href="#pet" transform="rotate(157.5)"/><use href="#pet" transform="rotate(180)"/><use href="#pet" transform="rotate(202.5)"/><use href="#pet" transform="rotate(225)"/><use href="#pet" transform="rotate(247.5)"/><use href="#pet" transform="rotate(270)"/><use href="#pet" transform="rotate(292.5)"/><use href="#pet" transform="rotate(315)"/><use href="#pet" transform="rotate(337.5)"/>
+    </g>
+    <circle r="22" fill="#1E3A6B" stroke="url(#gold)" stroke-width="2.5"/>
+    <circle r="15" fill="none" stroke="url(#gold)" stroke-width="1.2"/>
+    <g fill="url(#gold)"><path d="M0-13l3 10 10 3-10 3-3 10-3-10-10-3 10-3z"/></g>
+    <circle r="2.6" fill="#C8423F"/>
+  </symbol>
+</defs>
+</svg>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="contact"><span class="num">۰۲۱-۶۶۲۷۰۳۴۲</span><span>info@naghshkaghaz.ir</span></div>
+    <div class="msg" data-i18n="topMsg"></div>
+    <div class="langs"><button type="button" data-lang="fa">FA</button><i></i><button type="button" data-lang="en">EN</button></div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap hbar">
+    <nav class="main" aria-label="Main">
+      <div class="has-mega" id="megaWrap" data-for="shop">
+        <button type="button" id="megaBtn" aria-expanded="false" aria-controls="mega"><span data-i18n="navProducts"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="mega" id="mega">
+          <div class="wrap">
+            <div><h4 data-i18n="megaCats"></h4><ul id="megaCats"></ul></div>
+            <div><h4 data-i18n="megaPicks"></h4><ul id="megaPicks"></ul></div>
+            <div class="promo">
+              <div><span class="lat" style="color:#D7B877">TAZHIB · 1405</span><h3 style="font-size:20px;margin-top:6px" data-i18n="megaPromoT"></h3><p data-i18n="megaPromoP"></p><button class="btn sm line" type="button" data-filter="tazhib" data-i18n="megaPromoC"></button></div>
+              <svg viewBox="-50 -50 100 100" aria-hidden="true"><use href="#shamseh"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#story" data-for="shop" data-i18n="navAbri"></a>
+      <a href="#faq" data-for="shop" data-i18n="navFaq"></a>
+      <a href="#svc-list" data-for="services" data-i18n="svNav1"></a>
+      <a href="#quote" data-for="services" data-i18n="svNav2"></a>
+      <a href="#prices" data-for="services" data-i18n="svNav3"></a>
+      <a href="#services" class="door" data-for="shop"><span data-i18n="navDoor"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+      <a href="#shop" class="door" data-for="services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="transform:scaleX(-1)"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-i18n="navBack"></span></a>
+    </nav>
+    <button class="ibtn menu-btn" type="button" id="menuBtn" data-i18n-aria="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+    <a class="logo" href="#shop" aria-label="NAGHSH"><b>NAGHSH</b><small data-i18n="tagline"></small></a>
+    <div class="hacts">
+      <button class="ibtn" type="button" id="searchBtn" data-i18n-aria="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg></button>
+      <button class="ibtn hide-sm" type="button" id="wishBtn" data-i18n-aria="wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="dot num" id="wishCount" hidden></span></button>
+      <button class="cart-pill" type="button" id="cartBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><span class="t" data-i18n="cart"></span><span class="n num" id="cartCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ================= SHOP (entry) ================= -->
+<div data-view="shop">
+  <div class="wrap hero-wrap">
+    <section class="hero" id="hero" aria-roledescription="carousel" aria-label="NAGHSH">
+      <!-- slide 1: boutique / abri -->
+      <div class="slide on" data-slide="0">
+        <div class="copy">
+          <span class="lat eyebrow">PAPER BOUTIQUE · COLLECTION 1405</span>
+          <h1 data-i18n-html="s1t"></h1>
+          <p class="lede" data-i18n="s1l"></p>
+          <div class="row"><a class="btn dark" href="#collection"><span data-i18n="s1c"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><a class="btn line" href="#story" data-i18n="s1c2"></a></div>
+        </div>
+        <div class="visual">
+          <div class="arch"><canvas id="marble" aria-hidden="true"></canvas><div class="hint"><span data-i18n="hint"></span></div></div>
+          <div class="badge-rot" aria-hidden="true"><svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><circle cx="60" cy="60" r="58" fill="var(--card)"/><text direction="ltr" font-size="10.5" font-weight="700" letter-spacing="3.2" fill="currentColor" font-family="Vazirmatn,sans-serif"><textPath href="#circ">HANDMADE ABRI PAPER · NAGHSH ·</textPath></text></svg><b><svg width="34" height="34" viewBox="-50 -50 100 100"><use href="#shamseh"/></svg></b></div>
+          <div class="float" style="width:46%;bottom:-6%;inset-inline-start:-12%" id="heroBook"></div>
+        </div>
+      </div>
+      <!-- slide 2: tazhib -->
+      <div class="slide" data-slide="1">
+        <div class="copy">
+          <span class="lat eyebrow">TAZHIB COLLECTION</span>
+          <h1 data-i18n-html="s2t"></h1>
+          <p class="lede" data-i18n="s2l"></p>
+          <div class="row"><button class="btn dark" type="button" data-filter="tazhib"><span data-i18n="s2c"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><span class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7c-2-4-6-4-6-1s6 1 6 1zm0 0c2-4 6-4 6-1s-6 1-6 1z"/></svg><span data-i18n="s2n"></span></span></div>
+        </div>
+        <div class="visual">
+          <div class="arch" style="background:#1D2C4A"><svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="500" fill="url(#pTaz)" opacity=".55"/><circle cx="200" cy="210" r="150" fill="#1D2C4A" opacity=".7"/><use href="#shamseh" x="70" y="80" width="260" height="260"/></svg></div>
+          <div class="float" style="width:46%;bottom:8%;inset-inline-end:-12%" id="heroTaz"></div>
+          <div class="chip" style="top:10%;inset-inline-start:-8%"><span data-i18n="s2chip"></span><small data-i18n="s2chipS"></small></div>
+        </div>
+      </div>
+      <!-- slide 3: gifts (the shop entry carries no print content) -->
+      <div class="slide" data-slide="2">
+        <div class="copy">
+          <span class="lat eyebrow">GIFTS FOR WRITERS</span>
+          <h1 data-i18n-html="g3t"></h1>
+          <p class="lede" data-i18n="g3l"></p>
+          <div class="row"><button class="btn dark" type="button" data-filter="gifts"><span data-i18n="g3c"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><span class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 20l6-6M14 4l6 6-8 8-6-6z"/></svg><span data-i18n="g3n"></span></span></div>
+        </div>
+        <div class="visual">
+          <div class="arch" style="background:#E9DCCB"><svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="500" fill="url(#pFlor)"/><rect width="400" height="500" fill="#E9DCCB" opacity=".35"/></svg></div>
+          <div class="float" style="width:70%;bottom:6%;inset-inline-start:15%" id="heroGift"></div>
+          <div class="chip red" style="top:14%;inset-inline-end:-6%"><span data-i18n="g3chip"></span><small style="color:rgba(255,255,255,.85)" data-i18n="g3chipS"></small></div>
+        </div>
+      </div>
+      <div class="hctrl">
+        <div class="bars" role="tablist"><button type="button" class="on" data-go="0" aria-label="1"><i></i></button><button type="button" data-go="1" aria-label="2"><i></i></button><button type="button" data-go="2" aria-label="3"><i></i></button></div>
+        <span class="count"><b id="slideNo">01</b> / <span id="slideTot">03</span></span>
+        <div class="arrows"><button type="button" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button><button type="button" id="next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button></div>
+      </div>
+    </section>
+    <div class="trust" id="trust"></div>
+  </div>
+
+  <section class="sec" id="categories">
+    <div class="wrap">
+      <div class="sec-head rv"><div><span class="lat eyebrow">SHOP BY CATEGORY</span><h2 data-i18n="catsT"></h2></div><p data-i18n="catsP"></p></div>
+      <div class="bento" id="bento"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="collection" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv"><div><span class="lat eyebrow">PRODUCT LIST</span><h2 data-i18n="gridT"></h2></div><p data-i18n="gridP"></p></div>
+      <div class="cat-layout">
+        <aside class="side" id="side" aria-label="Categories"></aside>
+        <div>
+          <div class="chips" id="chips"></div>
+          <div class="toolbar">
+            <span class="muted num" id="resCount"></span>
+            <div class="tools">
+              <div class="seg-sm"><button type="button" id="wishOnly" aria-pressed="false" data-i18n="wishOnly"></button></div>
+              <select id="sort" aria-label="Sort"><option value="featured" data-i18n="sortF"></option><option value="new" data-i18n="sortN"></option><option value="asc" data-i18n="sortA"></option><option value="desc" data-i18n="sortD"></option></select>
+            </div>
+          </div>
+          <div class="grid" id="grid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marq" aria-hidden="true"><div class="track" id="marq"></div></div>
+
+  <section class="sec" id="story">
+    <div class="wrap edit">
+      <div class="arch rv"><canvas id="marble2" width="340" height="425"></canvas></div>
+      <div class="txt rv">
+        <span class="lat eyebrow">THE ATELIER · ABRI</span>
+        <h2 data-i18n="stT"></h2>
+        <p data-i18n="stP"></p>
+        <ol class="steps">
+          <li><span class="mono">01</span><div><b data-i18n="st1b"></b><span data-i18n="st1s"></span></div></li>
+          <li><span class="mono">02</span><div><b data-i18n="st2b"></b><span data-i18n="st2s"></span></div></li>
+          <li><span class="mono">03</span><div><b data-i18n="st3b"></b><span data-i18n="st3s"></span></div></li>
+        </ol>
+        <div><button class="btn line" type="button" data-filter="tazhib" data-i18n="stC"></button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap rv">
+    <!-- the one entrance from the shop into the separate services section -->
+    <div class="gate" id="door">
+      <div>
+        <span class="lat eyebrow">NAGHSH PRINT · SERVICES</span>
+        <h2 data-i18n="gtT"></h2>
+        <p data-i18n="gtP"></p>
+        <div class="rowb"><a class="btn red" href="#services"><span data-i18n="gtC"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></div>
+      </div>
+      <ul class="doorlist" id="doorList"></ul>
+    </div>
+  </section>
+
+  <section class="sec" id="faq">
+    <div class="wrap faq">
+      <div class="side-t rv"><span class="lat eyebrow">FAQ</span><h2 data-i18n="faqT"></h2><p class="muted" data-i18n="faqP"></p><span class="call num">۰۲۱-۶۶۲۷۰۳۴۲</span></div>
+      <div id="faqShop"></div>
+    </div>
+  </section>
+
+  <section class="wrap rv">
+    <div class="news">
+      <div><span class="lat eyebrow">NEWSLETTER</span><h2 style="margin-top:10px" data-i18n="nlT"></h2><p class="muted" style="margin-top:10px" data-i18n="nlP"></p></div>
+      <form id="nlForm" novalidate><input id="nl-email" type="email" dir="ltr" autocomplete="email" data-i18n-ph="nlPh" aria-label="Email"><button class="btn dark sm" type="submit" data-i18n="nlBtn"></button></form>
+      <p class="msg" id="nlMsg" role="status" hidden></p>
+    </div>
+  </section>
+</div>
+
+<!-- ================= SERVICES (behind the gateway) ================= -->
+<div data-view="services" hidden>
+  <div class="wrap">
+    <a class="back" href="#shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span data-i18n="backShop"></span></a>
+    <section class="shero">
+      <div class="copy">
+        <span class="lat eyebrow">ONLINE PRINT ORDER</span>
+        <h1 data-i18n-html="svT"></h1>
+        <p class="lede" data-i18n="svL"></p>
+        <div class="rowb"><a class="btn dark" href="#quote"><span data-i18n="s3c"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a><span class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></svg><span data-i18n="s3n"></span></span></div>
+      </div>
+      <div class="visual"><div class="arch" style="background:var(--surface-2)" id="svHeroArt"></div><div class="chip red" style="top:14%;inset-inline-end:-6%"><span data-i18n="s3chip"></span><small style="color:rgba(255,255,255,.85)" data-i18n="s3chipS"></small></div></div>
+    </section>
+  </div>
+
+  <section class="sec" id="svc-list">
+    <div class="wrap">
+      <div class="sec-head rv"><div><span class="lat eyebrow">OUR SERVICES</span><h2 data-i18n="svcT"></h2></div><p data-i18n="svcP"></p></div>
+      <div class="svc-grid" id="svcGrid"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="quote" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv"><div><span class="lat eyebrow">INSTANT QUOTE</span><h2 data-i18n="qT"></h2></div><p data-i18n="qP"></p></div>
+      <div class="quote">
+        <form class="qform" id="qForm" novalidate>
+          <div class="qgroup"><span class="lbl" data-i18n="qType"></span><div class="seg" id="qType"></div></div>
+          <div class="qgroup"><span class="lbl" data-i18n="qSize"></span><div class="seg" id="qSize"></div></div>
+          <div class="qgroup"><span class="lbl" data-i18n="qSides"></span><div class="seg" id="qSides"></div></div>
+          <div class="two-f">
+            <div class="qgroup"><label for="qPages" data-i18n="qPages"></label><div class="stepper"><button type="button" data-step="qPages" data-d="-10" aria-label="−">−</button><input id="qPages" type="number" min="1" max="20000" value="240" inputmode="numeric"><button type="button" data-step="qPages" data-d="10" aria-label="+">+</button></div></div>
+            <div class="qgroup"><label for="qCopies" data-i18n="qCopies"></label><div class="stepper"><button type="button" data-step="qCopies" data-d="-1" aria-label="−">−</button><input id="qCopies" type="number" min="1" max="500" value="1" inputmode="numeric"><button type="button" data-step="qCopies" data-d="1" aria-label="+">+</button></div></div>
+          </div>
+          <div class="qgroup"><span class="lbl" data-i18n="qBind"></span><div class="seg" id="qBind"></div></div>
+          <label class="drop" id="drop" for="qFile"><input id="qFile" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 16v4h16v-4"/></svg></i><span><b id="fileName" data-i18n="qFile"></b><small data-i18n="qFileS"></small></span><span class="pick" data-i18n="qPick"></span></label>
+        </form>
+        <aside class="summary" aria-live="polite">
+          <div class="stp"><span class="lat">ORDER SUMMARY</span><span class="num" id="sTier"></span></div>
+          <div>
+            <div class="srow"><span data-i18n="sType"></span><b id="sType"></b></div>
+            <div class="srow"><span data-i18n="sPages"></span><b class="num" id="sPages"></b></div>
+            <div class="srow"><span data-i18n="sSheets"></span><b class="num" id="sSheets"></b></div>
+            <div class="srow"><span data-i18n="sUnit"></span><b class="num" id="sUnit"></b></div>
+            <div class="srow"><span data-i18n="sBind"></span><b class="num" id="sBind"></b></div>
+          </div>
+          <div class="pay"><span data-i18n="sPay"></span><b class="num" id="sTotal"></b></div>
+          <div class="up" id="sUp"></div>
+          <div class="fields" id="qContact" hidden>
+            <input class="inp" id="qName" type="text" autocomplete="name" data-i18n-ph="cName" aria-label="Name">
+            <input class="inp" id="qPhone" type="tel" dir="ltr" autocomplete="tel" placeholder="09xx xxx xxxx" aria-label="Mobile">
+          </div>
+          <p class="err" id="qErr" role="alert" hidden></p>
+          <button class="btn red block" type="button" id="qAdd"><span data-i18n="qAdd"></span></button>
+          <span class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></svg><span data-i18n="s3n"></span></span>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="prices" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv"><div><span class="lat eyebrow">PRICE LIST</span><h2 data-i18n="ptT"></h2></div><p data-i18n="ptP"></p></div>
+      <div class="ptable rv">
+        <div class="head"><b data-i18n="ptHead"></b><div class="seg-sm" id="ptSize"></div></div>
+        <div class="tbl"><table><thead id="ptHeadRow"></thead><tbody id="ptBody"></tbody></table></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap rv">
+    <div class="b2b">
+      <div><span class="lat eyebrow">WHOLESALE & CONTRACTS</span><h2 data-i18n="bT"></h2><p data-i18n="bP"></p><a class="btn dark" style="margin-top:22px" href="#contact" data-i18n="bC"></a></div>
+      <ul id="b2bList"></ul>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap faq">
+      <div class="side-t rv"><span class="lat eyebrow">FAQ</span><h2 data-i18n="faqT"></h2><p class="muted" data-i18n="faqP"></p><span class="call num">۰۲۱-۶۶۲۷۰۳۴۲</span></div>
+      <div id="faqSvc"></div>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer class="site" id="contact">
+  <div class="wrap cols">
+    <div>
+      <div class="logo" style="justify-items:start;text-align:start"><b>NAGHSH</b><small data-i18n="tagline" style="color:var(--on-invert-2)"></small></div>
+      <p style="margin-top:18px" data-i18n="ftAbout"></p>
+    </div>
+    <div><h4 data-i18n="ftShop"></h4><ul id="ftShop"></ul></div>
+    <div><h4 data-i18n="ftSvc"></h4><ul id="ftSvc"></ul></div>
+    <div>
+      <h4 data-i18n="ftContact"></h4>
+      <ul>
+        <li><span class="ltr num" id="phone">۰۲۱-۶۶۲۷۰۳۴۲</span><button class="copybtn" type="button" data-copy="021-66270342" data-i18n="copy"></button></li>
+        <li><span class="ltr">info@naghshkaghaz.ir</span></li>
+        <li data-i18n="addr"></li>
+        <li data-i18n="hours"></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wordmark" aria-hidden="true">NAGHSH</div>
+  <div class="wrap legal"><span data-i18n="legal"></span><span data-i18n="demo"></span></div>
+</footer>
+
+<dialog class="qv" id="qv" aria-label="Product"></dialog>
+<dialog class="drawer" id="drawer" aria-labelledby="drawerTitle"></dialog>
+<dialog class="drawer start" id="mnav" aria-label="Menu"></dialog>
+<dialog class="search" id="search" aria-label="Search">
+  <div class="bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" autocomplete="off" data-i18n-ph="searchPh" aria-label="Search"><button class="ibtn" type="button" data-close-search aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="res" id="res"></div>
+</dialog>
+<div class="toast" id="toast" data-off role="status"></div>
+
+<script>
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
+const X='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>';
+
+/* ================= copy ================= */
+const T={
+fa:{tagline:'نقش کاغذ · بوتیک کاغذ و لوازم‌التحریر',topMsg:'ارسال همان‌روز در تهران · بسته‌بندی هدیه رایگان · حکاکی نام رایگان',
+navProducts:'محصولات',navAbri:'آتلیه ابری',navPrint:'چاپ آنلاین',navFaq:'سوالات',menu:'منو',search:'جستجو',wishlist:'علاقه‌مندی‌ها',cart:'سبد خرید',
+megaCats:'دسته‌بندی‌ها',megaPicks:'انتخاب‌های این فصل',megaPromoT:'کالکشن تذهیب ۱۴۰۵',megaPromoP:'طلاکوب با دست، در تیراژ محدود.',megaPromoC:'دیدن کالکشن',
+s1t:'بوتیک <em>کاغذ</em> و لوازم‌التحریر نفیس',s1l:'دفترهای چرمی، کاغذ ابری دست‌ساز، خودنویس و قلم نی؛ انتخاب‌شده با وسواس برای میزهای تحریر خاص.',s1c:'خرید از کالکشن',s1c2:'داستان آتلیه',hint:'روی کاغذ بکشید یا ضربه بزنید',
+s2t:'دفترهای <em>تذهیب</em>، طلاکوب با دست',s2l:'شمسه، ترنج و سرلوح به سبک نسخه‌های قدیم ایرانی؛ برای یادداشت، هدیه و یادگاری.',s2c:'دیدن کالکشن تذهیب',s2n:'بسته‌بندی هدیه رایگان',s2chip:'تیراژ محدود',s2chipS:'هر دفتر شماره‌گذاری‌شده',
+s3t:'سفارش آنلاین <em>چاپ و تکثیر</em>',s3l:'تعرفه را آنلاین محاسبه کنید، فایل را بفرستید و سفارش را همان روز تحویل بگیرید.',s3c:'محاسبه تعرفه',s3n:'امکان صدور فاکتور رسمی برای شرکت‌ها و سازمان‌ها',s3chip:'از ۹۵۰ تومان',s3chipS:'هر برگ A4',s3chip2:'تحویل از ۳ ساعت',
+tr1b:'ارسال سریع',tr1s:'همان‌روز در تهران، ۳ روزه سراسر کشور',tr2b:'بسته‌بندی هدیه',tr2s:'رایگان، با کارت دست‌نویس',tr3b:'حکاکی نام',tr3s:'رایگان روی خودنویس و دفتر چرمی',tr4b:'ضمانت اصالت',tr4s:'۷ روز ضمانت بازگشت کالا',
+catsT:'هر چیزی که روی میز تحریر جا دارد',catsP:'از دفتر روزانه تا جعبه هدیه نویسنده؛ دسته را انتخاب کنید تا محصولاتش را ببینید.',
+c_all:'همه محصولات',c_notebooks:'دفتر و سررسید',c_tazhib:'تذهیب و کاغذ ابری',c_writing:'قلم و جوهر',c_stationery:'لوازم‌التحریر',c_gifts:'هدیه و بسته‌بندی',
+cd_tazhib:'طلاکوب با دست و کاغذهایی که هیچ دو برگشان یکی نیست.',items:'{n} محصول',seeAll:'مشاهده',
+gridT:'بوتیک کاغذ و لوازم‌التحریر',gridP:'هر محصول کد اختصاصی دارد؛ برای سفارش تلفنی یا عمده کافی است کد را بگویید.',
+showing:'{n} محصول',wishOnly:'فقط علاقه‌مندی‌ها',sortF:'پیشنهاد ما',sortN:'جدیدترین',sortA:'ارزان‌ترین',sortD:'گران‌ترین',noWish:'هنوز محصولی را نشان نکرده‌اید. روی قلب هر محصول بزنید.',
+f_new:'جدید',f_best:'پرفروش',f_hand:'دست‌ساز',f_ltd:'تیراژ محدود',add:'افزودن به سبد',added:'به سبد اضافه شد',view:'مشاهده سبد',toman:'تومان',
+qvCode:'کد محصول',qvSpec:'مشخصات',qvCat:'دسته',perk1:'ارسال رایگان برای سفارش بالای ۲ میلیون تومان',perk2:'بسته‌بندی هدیه بدون هزینه',perk3:'۷ روز ضمانت بازگشت',close:'بستن',
+marq:['دفتر','تذهیب','کاغذ ابری','خودنویس','قلم نی','مهر موم','پاکت','واشی‌تیپ'],
+stT:'کاغذ ابری؛ رنگی که روی آب نقش می‌بندد',stP:'ابری‌سازی هنر قدیمی صحافان ایرانی است. در آتلیه نقش، هر برگ با دست روی حوضچه کتیرا ساخته می‌شود و طرحش تکرارنشدنی است. همین حالا روی کاغذ صفحه اول بکشید تا خودتان شانه بزنید.',
+st1b:'رنگ روی آب',st1s:'رنگ‌دانه طبیعی را روی آب و کتیرا می‌چکانیم.',st2b:'شانه و قلم مو',st2s:'با شانه و موی اسب، نقش را روی سطح آب می‌کشیم.',st3b:'برگ کاغذ',st3s:'کاغذ پنبه‌ای ۱۲۰ گرم را می‌خوابانیم و خشک می‌کنیم.',stC:'خرید کاغذ ابری',
+gtT:'دنبال چاپ و تکثیر هستید؟',gtP:'خدمات چاپ نقش یک بخش جداگانه دارد: پرینت، صحافی، کارت ویزیت، لیبل و سفارش‌های سازمانی، با محاسبه آنلاین تعرفه.',gtC:'ورود به بخش خدمات',
+taglineSvc:'نقش کاغذ · خدمات چاپ و تکثیر',topMsgSvc:'تحویل از ۳ ساعت · تعرفه پلکانی · امکان صدور فاکتور رسمی',navDoor:'خدمات چاپ و تکثیر',navBack:'بازگشت به فروشگاه',svNav1:'خدمات',svNav2:'محاسبه تعرفه',svNav3:'تعرفه‌ها',
+g3t:'هدیه‌ای برای <em>اهل قلم</em>',g3l:'جعبه هدیه نویسنده با خودنویس، دفتر چرمی و جوهر مازو؛ بسته‌بندی‌شده در کاغذ ابری با کارت دست‌نویس.',g3c:'دیدن هدیه‌ها',g3n:'حکاکی نام رایگان روی خودنویس',g3chip:'حکاکی رایگان',g3chipS:'نام یا امضا روی قلم',perPage:'تومان / برگ',
+faqT:'سوالات متداول',faqP:'جواب سوالتان اینجا نبود؟ از ۹ صبح تا ۹ شب پاسخگو هستیم.',
+fq:[['زمان و نحوه ارسال سفارش‌ها چطور است؟','در تهران با پیک، معمولاً همان روز کاری یا روز بعد. برای شهرستان‌ها با پست پیشتاز و معمولاً ظرف سه روز کاری.'],['بسته‌بندی هدیه هزینه دارد؟','خیر. هر سفارش را با کاغذ ابری، روبان کتان و یک کارت دست‌نویس به انتخاب شما بسته‌بندی می‌کنیم.'],['امکان حکاکی یا چاپ نام روی دفتر هست؟','بله. حکاکی لیزری روی دفتر چرمی و خودنویس و طلاکوب نام روی دفترهای تذهیب انجام می‌شود؛ معمولاً یک روز کاری زمان می‌برد.'],['اگر محصول آسیب دیده برسد چه می‌شود؟','تا ۷ روز پس از تحویل، محصول آسیب‌دیده بدون هزینه تعویض می‌شود.']],
+fqs:[['فایل‌ها را با چه فرمتی ارسال کنم؟','PDF، Word، JPG و PNG پذیرفته می‌شود. برای بهترین نتیجه، PDF با فونت‌های جاسازی‌شده پیشنهاد می‌شود.'],['برای سفارش‌های حجیم تخفیف بیشتری دارید؟','بله. برای شرکت‌ها، آموزشگاه‌ها و سازمان‌ها بسته به حجم سفارش تعرفه ویژه در نظر گرفته می‌شود.'],['امکان صدور فاکتور رسمی وجود دارد؟','بله، برای اشخاص حقوقی و ارگان‌های دولتی.'],['اگر کیفیت چاپ مطابق انتظار نباشد چه می‌شود؟','در صورت هرگونه ایراد فنی، سفارش بدون هزینه دوباره چاپ و ارسال می‌شود.']],
+nlT:'اولین نفری باشید که کالکشن‌های تازه را می‌بیند',nlP:'ماهی یک ایمیل؛ کالکشن‌های جدید، کارگاه‌های خوشنویسی و تخفیف‌های اعضا.',nlPh:'ایمیل شما',nlBtn:'عضویت',nlOk:'عضو خبرنامه شدید.',nlErr:'یک ایمیل معتبر وارد کنید.',
+backShop:'بازگشت به فروشگاه',svT:'سفارش آنلاین <em>چاپ و تکثیر</em>',svL:'تعرفه را آنلاین محاسبه کنید، فایل را بفرستید و سفارش را همان روز در فروشگاه تحویل بگیرید یا با پیک دریافت کنید.',
+svcT:'خدمات چاپ و تکثیر',svcP:'قیمت‌ها را مقایسه کنید؛ بعد از ثبت سفارش، نتیجه را با بهترین کیفیت تحویل بگیرید.',from:'از',order:'ثبت سفارش',
+sv:{bw:['پرینت سیاه و سفید','جزوه، پایان‌نامه و اسناد اداری با وضوح بالا.'],color:['پرینت رنگی','رنگ دقیق با دستگاه‌های لیزری صنعتی.'],glossy:['چاپ روی کاغذ گلاسه','کاتالوگ، عکس و نمونه‌کار با جلوه براق.'],label:['لیبل پشت‌چسب','مات و براق، برش‌خورده در ابعاد دلخواه.'],lam:['لمینت','محافظت از مدارک و کارت‌ها، گرم و سرد.'],flyer:['تراکت و بروشور','تیراژ بالا با قیمت رقابتی و تحویل سریع.']},
+qT:'تعرفه را آنلاین محاسبه کنید',qP:'مشخصات سفارش را وارد کنید؛ قیمت بر اساس تعرفه پلکانی و بدون هزینه پنهان محاسبه می‌شود.',
+qType:'نوع چاپ',qSize:'اندازه کاغذ',qSides:'رو و پشت',qPages:'تعداد صفحات فایل',qCopies:'تعداد نسخه (سری)',qBind:'صحافی',
+t_bw:'سیاه و سفید',t_color:'رنگی',t_glossy:'رنگی گلاسه',sd_single:'یک‌رو',sd_duplex:'دورو (۱۰٪ تخفیف)',b_none:'بدون صحافی',b_staple:'منگنه',b_spiral:'فنر و طلق',b_perfect:'صحافی چسبی',
+qFile:'بارگذاری فایل سفارش',qFileS:'PDF، Word، JPG یا PNG، حداکثر ۵۰ مگابایت',qPick:'انتخاب فایل',
+sTier:'پله {a} از ۴',sType:'نوع چاپ',sPages:'تعداد کل صفحات',sSheets:'تعداد برگ مصرفی',sUnit:'قیمت هر صفحه',sBind:'صحافی',sPay:'مبلغ قابل پرداخت',
+sUp:'با سفارش <b>{n}</b> صفحه بیشتر، قیمت هر صفحه به <b>{p}</b> کاهش می‌یابد.',sBest:'شما در <b>بهترین پله قیمت</b> هستید.',qAdd:'افزودن به لیست سفارش',qAdded:'سفارش چاپ به سبد اضافه شد',
+jobName:'چاپ {type} · {size} · {pages} صفحه × {copies}',
+ptT:'تعرفه پلکانی پرینت',ptP:'با افزایش تعداد صفحات یا سری‌ها تعرفه کاهش پیدا می‌کند. قیمت‌ها برای هر صفحه یک‌رو و به تومان است.',ptHead:'قیمت هر صفحه',ptType:'نوع چاپ / تعداد صفحات',best:'بهترین قیمت',rng:['۱ تا ۱۰۰','۱۰۱ تا ۵۰۰','۵۰۱ تا ۱۰۰۰','بیش از ۱۰۰۰'],
+bT:'آماده عقد قرارداد با سازمان‌ها، شرکت‌ها و آموزشگاه‌ها',bP:'سفارش‌های حجیم سازمانی را با تعرفه ویژه، فاکتور رسمی و زمان‌بندی دقیق تحویل می‌دهیم.',bC:'مشاوره قرارداد سازمانی',b2b:['تعرفه ویژه قراردادی','فاکتور رسمی و توکن','کارشناس اختصاصی پروژه','تحویل زمان‌بندی‌شده'],
+cartT:'سبد خرید',empty:'سبد خرید شما خالی است.',goShop:'رفتن به فروشگاه',subtotal:'جمع کل',remove:'حذف',checkout:'ادامه خرید',shipFree:'ارسال این سفارش رایگان است.',shipLeft:'{a} تا ارسال رایگان',
+coT:'اطلاعات ارسال',cName:'نام و نام خانوادگی',cPhone:'شماره موبایل',city:'شهر',address:'نشانی کامل',place:'ثبت نهایی سفارش',back:'بازگشت به سبد',
+errForm:'همه فیلدها را پر کنید. شماره موبایل باید ۱۱ رقم باشد و با ۰۹ شروع شود.',errPhone:'نام و شماره موبایل ۱۱ رقمی (۰۹...) را وارد کنید.',done:'سفارش {c} ثبت شد. این نسخه نمایشی است و پرداختی انجام نشد.',
+searchPh:'جستجوی دفتر، تذهیب، خودنویس…',searchHint:'نام محصول یا کد آن را بنویسید (مثلاً XTZ).',noRes:'محصولی پیدا نشد.',
+ftAbout:'بوتیک کاغذ و لوازم‌التحریر نفیس، همراه با چاپ و تکثیر آنلاین. از هر خرید، یک برگ کاغذ ابری هدیه می‌گیرید.',ftShop:'فروشگاه',ftSvc:'چاپ آنلاین',ftContact:'تماس با ما',
+addr:'تهران، نشانی نمونه، پلاک ۱۲',hours:'شنبه تا پنج‌شنبه، ۹ تا ۲۱',copy:'کپی',copied:'شماره کپی شد',legal:'© ۱۴۰۵ نقش کاغذ. همه حقوق محفوظ است.',demo:'نسخه نمایشی؛ نشانی و قیمت‌ها نمونه هستند.'},
+en:{tagline:'Naghsh Kaghaz · Paper & stationery boutique',topMsg:'Same-day delivery in Tehran · Free gift wrapping · Free name engraving',
+navProducts:'Products',navAbri:'Abri atelier',navPrint:'Online print',navFaq:'FAQ',menu:'Menu',search:'Search',wishlist:'Wishlist',cart:'Cart',
+megaCats:'Categories',megaPicks:'This season’s picks',megaPromoT:'Tazhib collection 1405',megaPromoP:'Hand-gilded, in a limited run.',megaPromoC:'See the collection',
+s1t:'A boutique of fine <em>paper</em> and stationery',s1l:'Leather journals, handmade abri paper, fountain pens and reed pens, chosen with care for particular writing desks.',s1c:'Shop the collection',s1c2:'The atelier story',hint:'Drag or tap the paper',
+s2t:'<em>Tazhib</em> notebooks, gilded by hand',s2l:'Shamseh medallions and illuminated headpieces in the manner of old Persian manuscripts, for notes, gifts and keepsakes.',s2c:'See the tazhib collection',s2n:'Free gift wrapping',s2chip:'Limited run',s2chipS:'Every notebook is numbered',
+s3t:'Order <em>printing & copies</em> online',s3l:'Work out the price online, send your file, and collect the order the same day.',s3c:'Get a quote',s3n:'Official invoices for companies and organisations',s3chip:'From 950 Toman',s3chipS:'per A4 sheet',s3chip2:'Ready in 3 hours',
+tr1b:'Fast delivery',tr1s:'Same day in Tehran, 3 days nationwide',tr2b:'Gift wrapping',tr2s:'Free, with a handwritten card',tr3b:'Name engraving',tr3s:'Free on pens and leather journals',tr4b:'Authenticity promise',tr4s:'7-day return guarantee',
+catsT:'Everything that belongs on a writing desk',catsP:'From a daily journal to a writer’s gift box. Pick a category to see its products.',
+c_all:'All products',c_notebooks:'Notebooks & planners',c_tazhib:'Tazhib & abri paper',c_writing:'Pens & ink',c_stationery:'Stationery',c_gifts:'Gifts & wrapping',
+cd_tazhib:'Hand gilding, and papers where no two sheets are alike.',items:'{n} products',seeAll:'View',
+gridT:'Paper & stationery boutique',gridP:'Every product has its own code. For phone or wholesale orders, just quote the code.',
+showing:'{n} products',wishOnly:'Wishlist only',sortF:'Our picks',sortN:'Newest',sortA:'Price: low to high',sortD:'Price: high to low',noWish:'Nothing saved yet. Tap the heart on any product.',
+f_new:'New',f_best:'Bestseller',f_hand:'Handmade',f_ltd:'Limited',add:'Add to cart',added:'Added to cart',view:'View cart',toman:'Toman',
+qvCode:'Product code',qvSpec:'Details',qvCat:'Category',perk1:'Free delivery on orders over 2,000,000 Toman',perk2:'Gift wrapping at no cost',perk3:'7-day return guarantee',close:'Close',
+marq:['Notebooks','Tazhib','Abri paper','Fountain pens','Reed pens','Wax seals','Envelopes','Washi tape'],
+stT:'Abri paper: colour that takes shape on water',stP:'Abri marbling is an old craft of Persian bookbinders. In the Naghsh atelier each sheet is floated by hand on a tragacanth bath, so no pattern repeats. Drag across the paper on the first screen to comb one yourself.',
+st1b:'Colour on water',st1s:'Natural pigment is dropped onto water thickened with tragacanth.',st2b:'Comb and brush',st2s:'Combs and horsehair brushes draw the pattern across the surface.',st3b:'The sheet',st3s:'120 gsm cotton paper is laid down, lifted and dried.',stC:'Shop abri paper',
+gtT:'Looking for printing and copies?',gtP:'Naghsh print services have their own section: printing, binding, business cards, labels and organisational orders, with an online price calculator.',gtC:'Enter print services',
+taglineSvc:'Naghsh Kaghaz · Print & copy services',topMsgSvc:'Ready in 3 hours · Tiered pricing · Official invoices available',navDoor:'Print services',navBack:'Back to the shop',svNav1:'Services',svNav2:'Get a quote',svNav3:'Prices',
+g3t:'A gift for <em>writers</em>',g3l:'The writer’s gift box: a fountain pen, a leather journal and iron-gall ink, wrapped in abri paper with a handwritten card.',g3c:'See the gifts',g3n:'Free name engraving on the pen',g3chip:'Free engraving',g3chipS:'A name or signature on the pen',perPage:'Toman / sheet',
+faqT:'Frequently asked questions',faqP:'Didn’t find your answer? We reply from 9 am to 9 pm.',
+fq:[['How and when are orders delivered?','In Tehran by courier, usually the same or next working day. Elsewhere by express post, usually within three working days.'],['Does gift wrapping cost extra?','No. We wrap every order in abri paper with a linen ribbon and a handwritten card of your choice.'],['Can you engrave or print a name?','Yes. Laser engraving on leather journals and pens, and gold-foiled names on tazhib notebooks; usually one working day.'],['What if a product arrives damaged?','Within 7 days of delivery, damaged items are exchanged at no cost.']],
+fqs:[['Which file formats do you accept?','PDF, Word, JPG and PNG. For best results, send a PDF with embedded fonts.'],['Do you discount large orders?','Yes. Companies, schools and organisations get special rates depending on volume.'],['Can you issue an official invoice?','Yes, for legal entities and government agencies.'],['What if the print quality is not right?','If there is any technical fault, we reprint and deliver the order at no cost.']],
+nlT:'Be the first to see new collections',nlP:'One email a month: new collections, calligraphy workshops and member offers.',nlPh:'Your email',nlBtn:'Subscribe',nlOk:'You are subscribed.',nlErr:'Enter a valid email address.',
+backShop:'Back to the shop',svT:'Order <em>printing & copies</em> online',svL:'Work out the price online, send your file, and pick the order up in store the same day or get it by courier.',
+svcT:'Printing & copying services',svcP:'Compare prices, place the order, and receive the result at the best quality.',from:'From',order:'Order',
+sv:{bw:['Black & white print','Course notes, theses and office documents in high resolution.'],color:['Colour print','Accurate colour on industrial laser machines.'],glossy:['Glossy print','Catalogues, photos and portfolios with a glossy finish.'],label:['Sticker labels','Matte or glossy, cut to any size.'],lam:['Lamination','Protects documents and cards, hot or cold.'],flyer:['Flyers & brochures','High runs at competitive prices, delivered fast.']},
+qT:'Get an instant quote',qP:'Enter your order details. The price follows the tiered rates, with no hidden costs.',
+qType:'Print type',qSize:'Paper size',qSides:'Sides',qPages:'Pages in the file',qCopies:'Copies',qBind:'Binding',
+t_bw:'Black & white',t_color:'Colour',t_glossy:'Glossy colour',sd_single:'Single-sided',sd_duplex:'Double-sided (10% off)',b_none:'No binding',b_staple:'Staple',b_spiral:'Spiral',b_perfect:'Perfect binding',
+qFile:'Upload your file',qFileS:'PDF, Word, JPG or PNG, up to 50 MB',qPick:'Choose file',
+sTier:'Tier {a} of 4',sType:'Print type',sPages:'Total pages',sSheets:'Sheets used',sUnit:'Price per page',sBind:'Binding',sPay:'Amount to pay',
+sUp:'Order <b>{n}</b> more pages and the price per page drops to <b>{p}</b>.',sBest:'You are on the <b>best price tier</b>.',qAdd:'Add to order list',qAdded:'Print job added to cart',
+jobName:'{type} print · {size} · {pages} pages × {copies}',
+ptT:'Tiered print prices',ptP:'Prices drop as the number of pages or copies grows. Prices are per single-sided page, in Toman.',ptHead:'Price per page',ptType:'Print type / pages',best:'Best price',rng:['1–100','101–500','501–1,000','Over 1,000'],
+bT:'Ready to sign contracts with organisations, companies and schools',bP:'We deliver large organisational orders with special rates, official invoices and precise scheduling.',bC:'Talk to us about a contract',b2b:['Special contract rates','Official invoice and tax token','A dedicated project manager','Scheduled delivery'],
+cartT:'Your cart',empty:'Your cart is empty.',goShop:'Go to the shop',subtotal:'Subtotal',remove:'Remove',checkout:'Checkout',shipFree:'Delivery for this order is free.',shipLeft:'{a} more for free delivery',
+coT:'Delivery details',cName:'Full name',cPhone:'Mobile number',city:'City',address:'Full address',place:'Place order',back:'Back to cart',
+errForm:'Fill in every field. The mobile number must be 11 digits starting with 09.',errPhone:'Enter your name and an 11-digit mobile number (09…).',done:'Order {c} placed. This is a demo, so no payment was taken.',
+searchPh:'Search notebooks, tazhib, pens…',searchHint:'Type a product name or its code (for example XTZ).',noRes:'No products found.',
+ftAbout:'A boutique of fine paper and stationery with online printing. Every purchase comes with a free sheet of abri paper.',ftShop:'Shop',ftSvc:'Online print',ftContact:'Contact',
+addr:'Tehran, sample address, No. 12',hours:'Saturday to Thursday, 9:00–21:00',copy:'Copy',copied:'Number copied',legal:'© 2026 Naghsh Kaghaz. All rights reserved.',demo:'Demo build: address and prices are placeholders.'}
+};
+
+/* ================= catalogue ================= */
+const CATS=['notebooks','tazhib','writing','stationery','gifts'];
+const CAT_LAT={all:'ALL',notebooks:'NOTEBOOKS',tazhib:'TAZHIB & ABRI',writing:'PENS & INK',stationery:'STATIONERY',gifts:'GIFT GOODS'};
+// [id, code, cat, kind, c1, c2, price, flag, latin, fa, en, specFa, specEn, descFa, descEn, order-added]
+const RAW=[
+['nb101','XNB-101','notebooks','leather','#5A2F3F','#C9A24A',1450000,'new','LEATHER JOURNAL','دفتر چرمی «شب‌بو»','“Shabbu” leather journal','A5 · ۱۹۲ برگ · ۱۰۰ گرم بی‌اسید','A5 · 192 sheets · 100 gsm acid-free','جلد چرم طبیعی دباغی‌شده با گیاه، دوخت دستی و کش نگهدارنده. کاغذ برای جوهر خودنویس مناسب است.','Vegetable-tanned leather, hand-sewn binding and an elastic closure. The paper takes fountain-pen ink without bleeding.',9],
+['nb104','XNB-104','notebooks','cloth','#2E6B5E','#E9DCC0',420000,'best','CLOTH NOTEBOOK','دفتر جلد پارچه‌ای رنگین','Coloured cloth notebook','A5 · ۱۲۰ برگ · ۹۰ گرم','A5 · 120 sheets · 90 gsm','جلد کتان با بافت نرم و لبه‌های گرد؛ در شش رنگ.','Soft linen cover with rounded corners, in six colours.',3],
+['nb118','XNB-118','notebooks','lined','#E8DCC4','#9B3B3B',285000,'','LINED NOTEBOOK','دفتر خط‌دار کرم A5','Cream lined notebook A5','A5 · ۹۶ برگ · ۸۰ گرم کرم','A5 · 96 sheets · 80 gsm cream','کاغذ کرم چشم‌نواز با خطوط کم‌رنگ ۷ میلی‌متری.','Easy-on-the-eyes cream paper with faint 7 mm rules.',2],
+['nb126','XNB-126','notebooks','dots','#1C2B3A','#D7263D',780000,'best','DOT-GRID PLANNER','سررسید نقطه‌چین ۱۴۰۶','1406 dot-grid planner','A5 · ۱۶۰ برگ · ۱۲۰ گرم','A5 · 160 sheets · 120 gsm','تقویم شمسی ۱۴۰۶ با صفحات هفتگی، نقطه‌چین ۵ میلی‌متری و دو نشانه پارچه‌ای.','Solar Hijri 1406 calendar with weekly spreads, a 5 mm dot grid and two ribbon markers.',8],
+['tz201','XTZ-201','tazhib','tazhib','#1D2C4A','#C69A48',690000,'new','GILDED TAZHIB BOOK','دفتر تذهیب طلاکوب','Gilded tazhib notebook','A5 · ۱۲۰ برگ · طلاکوب دستی','A5 · 120 sheets · hand gilded','جلد با شمسه طلاکوب و حاشیه تذهیب؛ هر نسخه شماره‌گذاری می‌شود.','Cover with a gold-foiled shamseh and illuminated border; every copy is numbered.',10],
+['tz214','XTZ-214','tazhib','postcards','#F3EBDD','#1D2C4A',240000,'','TAZHIB POSTCARDS','کارت‌پستال تذهیب، ست ۶ عددی','Tazhib postcards, set of 6','۶ کارت · ۱۰×۱۵ · مقوای ۳۵۰ گرم','6 cards · 10×15 cm · 350 gsm board','شش طرح تذهیب با چاپ طلایی و پاکت کرافت.','Six tazhib designs printed in gold, with kraft envelopes.',4],
+['tz230','XTZ-230','tazhib','abri','#000','#000',385000,'hand','ABRI MARBLED PAPER','کاغذ ابری دست‌ساز','Handmade abri marbled paper','۵۰×۷۰ سانتی‌متر · ۱۲۰ گرم پنبه‌ای','50×70 cm · 120 gsm cotton','هر برگ در آتلیه نقش روی آب کتیرا ساخته می‌شود و طرحش تکرارنشدنی است.','Each sheet is floated on tragacanth in the Naghsh atelier, so every pattern is one of a kind.',7],
+['tz236','XTZ-236','tazhib','flor','#F0E6D8','#A9545C',245000,'','FLORENTINE PAPER','کاغذ چاپ فلورانسی','Florentine print paper','۵۰×۷۰ سانتی‌متر · ۸۵ گرم','50×70 cm · 85 gsm','چاپ سیلک با نقش زنبق طلایی؛ برای جلدسازی، کادو و آستر جعبه.','Screen-printed gold lilies for bookbinding, gift wrap and box linings.',1],
+['wr301','XWR-301','writing','pen','#1E3F66','#C9A24A',2850000,'best','FOUNTAIN PEN','خودنویس فلزی نوک F','Steel fountain pen, F nib','بدنه برنجی · مبدل جوهر','Brass body · converter included','بدنه برنج با لاک لاجوردی و گیره طلایی؛ همراه مبدل جوهر و دو کارتریج.','Brass body in lapis lacquer with a gold clip; comes with a converter and two cartridges.',6],
+['wr308','XWR-308','writing','reeds','#C9A877','#5A3E22',690000,'','REED PEN SET','ست قلم نی خوشنویسی','Reed calligraphy pen set','۵ قلم · ۲ تا ۸ میلی‌متر','5 pens · 2–8 mm','نی‌های تراشیده برای نستعلیق و شکسته، در قلمدان پارچه‌ای.','Hand-cut reeds for Nastaliq and Shekasteh, in a cloth pen roll.',5],
+['wr312','XWR-312','writing','ink','#1B2A4A','#F1ECE2',540000,'','IRON-GALL INK','جوهر مازو ۵۰ میلی‌لیتر','Iron-gall ink, 50 ml','آبی‌سیاه · ضدآب پس از خشک‌شدن','Blue-black · water-resistant when dry','جوهر سنتی مازو که با گذشت زمان تیره‌تر می‌شود.','Traditional iron-gall ink that darkens as it dries.',0],
+['st330','XST-330','stationery','washi','#C8423F','#2F6B5C',95000,'','WASHI TAPE','واشی‌تیپ طرح سنتی','Traditional washi tape','۳ رول · ۱۵ میلی‌متر × ۱۰ متر','3 rolls · 15 mm × 10 m','طرح‌های کاشی و ترمه روی کاغذ ژاپنی قابل جداشدن.','Tile and termeh patterns on removable Japanese paper.',11],
+['st355','XST-355','stationery','envelope','#C29469','#7A2E2E',120000,'','KRAFT ENVELOPES','پاکت نامه کرافت، ۱۰ عددی','Kraft envelopes, pack of 10','DL · کرافت ۱۲۰ گرم · بند و دکمه','DL · 120 gsm kraft · string closure','پاکت کرافت با بند و دکمه؛ برای نامه، کارت دعوت و اسناد.','Kraft envelopes with a string-and-button closure, for letters and invitations.',12],
+['st361','XST-361','stationery','seal','#6B4A2F','#9E2F35',1180000,'new','WAX SEAL KIT','ست مهر موم و مهر برنجی','Wax seal kit with brass stamp','مهر ۲۵ میلی‌متر · ۶ شمش موم','25 mm stamp · 6 wax sticks','دسته چوب گردو، سر برنجی با حرف دلخواه و موم در شش رنگ.','Walnut handle, brass head with your initial, and wax in six colours.',13],
+['gf410','XGF-410','gifts','box','#C9A57A','#7A2E2E',310000,'','GIFT BOX','جعبه هدیه دست‌ساز','Handmade gift box','۲۰×۲۰×۸ سانتی‌متر · مقوای کرافت','20×20×8 cm · kraft board','جعبه دست‌ساز با روبان کتان و کارت دست‌نویس.','Handmade box with a linen ribbon and a handwritten card.',14],
+['gf420','XGF-420','gifts','writerbox','#16233A','#C9A24A',3950000,'ltd','WRITER’S GIFT BOX','جعبه هدیه نویسنده','The writer’s gift box','خودنویس · دفتر چرمی · جوهر','Fountain pen · leather journal · ink','خودنویس، دفتر چرمی شب‌بو، جوهر مازو و یک برگ کاغذ ابری در جعبه پارچه‌ای. حکاکی نام رایگان.','Fountain pen, Shabbu journal, iron-gall ink and a sheet of abri paper in a cloth box. Free name engraving.',15],
+['gf422','XGF-422','gifts','wrap','#F3E9DF','#C8423F',145000,'','WRAPPING PAPER','کاغذ کادو طرح گل، رول','Floral wrapping paper roll','۵ متر · ۷۰ گرم','5 m · 70 gsm','کاغذ کادو مات با نقش گل و برگ.','Matte wrapping paper with a flower-and-leaf print.',16]];
+const P=RAW.map(r=>({id:r[0],code:r[1],cat:r[2],kind:r[3],c1:r[4],c2:r[5],price:r[6],flag:r[7],lat:r[8],fa:r[9],en:r[10],sfa:r[11],sen:r[12],dfa:r[13],den:r[14],age:r[15]}));
+const PICKS=['tz201','wr301','nb101','gf420'];
+
+/* ================= print pricing (from the NAGHSH tiered table) ================= */
+const PT={A5:{bw:[1200,1000,800,650],color:[5000,4300,3700,3200],glossy:[9500,8500,7500,6600]},
+          A4:{bw:[1800,1500,1200,950],color:[7500,6500,5500,4800],glossy:[14000,12500,11000,9800]},
+          A3:{bw:[3600,3000,2400,1900],color:[15000,13000,11000,9600],glossy:[28000,25000,22000,19600]}};
+const TIER_START=[1,101,501,1001], BINDP={none:0,staple:5000,spiral:35000,perfect:60000};
+const SVCS=[['bw',950,'M6 9V3h12v6M6 18H4v-7h16v7h-2M7 14h10v7H7z'],['color',4800,'M12 3a9 9 0 1 0 0 18c1 0 1.5-.8 1.5-1.6 0-1.2 1-1.6 2-1.6H18a3 3 0 0 0 3-3C21 7 17 3 12 3zM7.5 11h.01M10 7h.01M15 7h.01'],['glossy',9800,'M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5z'],['label',12000,'M3 12V4h8l10 10-8 8zM7.5 7.5h.01'],['lam',15000,'M4 6h16v12H4zM8 6v12M4 10h4'],['flyer',650,'M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6']];
+function quote({type,size,sides,pages,copies,bind}){
+  pages=Math.max(1,Math.floor(pages)||1); copies=Math.max(1,Math.floor(copies)||1);
+  const total=pages*copies, tier=total>1000?3:total>500?2:total>100?1:0, unit=PT[size][type][tier];
+  const duplex=sides==='duplex', sheets=duplex?Math.ceil(pages/2)*copies:total;
+  const printCost=Math.round(total*unit*(duplex?.9:1)), bindCost=BINDP[bind]*copies;
+  const next=tier<3?{need:TIER_START[tier+1]-total,unit:PT[size][type][tier+1]}:null;
+  return {total,tier,unit,sheets,printCost,bindCost,price:printCost+bindCost,next};
+}
+// self-check against the figures in the NAGHSH design: 240 B&W A4 pages → 360,000 and "261 more pages → 1,200"
+(()=>{const q=quote({type:'bw',size:'A4',sides:'single',pages:240,copies:1,bind:'none'});
+ console.assert(q.price===360000&&q.next.need===261&&q.next.unit===1200,'tier example');
+ const d=quote({type:'bw',size:'A4',sides:'duplex',pages:11,copies:2,bind:'spiral'});
+ console.assert(d.sheets===12&&d.price===Math.round(22*1800*.9)+70000,'duplex + binding');
+ console.assert(quote({type:'color',size:'A3',sides:'single',pages:1001,copies:1,bind:'none'}).next===null,'best tier');})();
+
+/* ================= state ================= */
+let lang=store.get('nk-lang','fa'); if(!T[lang]) lang='fa';
+let cart=store.get('nk-cart',null); if(!cart||typeof cart!=='object') cart={nb126:1,wr301:1}; // sample cart so the drawer opens in a working state
+let jobs=store.get('nk-jobs',[]); if(!Array.isArray(jobs)) jobs=[];
+let wish=store.get('nk-wish',['tz201']); if(!Array.isArray(wish)) wish=[];
+let filter='all', sort='featured', wishOnly=false;
+const qs={type:'bw',size:'A4',sides:'single',bind:'none'};
+const t=(k,v)=>{let s=T[lang][k]; if(s==null) s=k; if(v&&typeof s==='string') for(const x in v) s=s.split('{'+x+'}').join(v[x]); return s};
+const nf=n=>new Intl.NumberFormat(lang==='fa'?'fa-IR':'en-US').format(n);
+const money=n=>nf(n)+' '+t('toman');
+const pad=n=>lang==='fa'?nf(n).padStart(2,'۰'):String(n).padStart(2,'0');
+const byId=id=>P.find(p=>p.id===id);
+const nm=p=>p[lang], spec=p=>lang==='fa'?p.sfa:p.sen, desc=p=>lang==='fa'?p.dfa:p.den;
+
+/* ================= abri marbling: exact inverse of ink-drop and tine-line operations ================= */
+const INKS=[[20,19,18],[198,154,72],[215,38,61],[29,44,74],[240,235,226],[47,107,92],[168,84,92]];
+const BASE=[226,218,203], OW=1000, OH=1250;
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const drop=(x,y,r,c)=>({t:0,x,y,r2:r*r,c});
+function tine(x,y,mx,my,a,l){const m=Math.hypot(mx,my)||1;mx/=m;my/=m;return{t:1,x,y,mx,my,nx:-my,ny:mx,a,l}}
+function abriOps(seed){
+  const r=rng(seed),ops=[];
+  for(let i=0;i<16;i++){const x=r()*OW,y=r()*OH,k=4+(r()*4|0); for(let j=0;j<k;j++) ops.push(drop(x,y,30+r()*36,INKS[(i+j)%INKS.length]))}
+  for(let i=0;i<90;i++) ops.push(drop(r()*OW,r()*OH,18+r()*38,INKS[(r()*INKS.length)|0]));
+  for(let y=0,k=0;y<=OH;y+=78,k++) ops.push(tine(0,y,1,0,(k%2?1:-1)*80,30));
+  for(let x=0,k=0;x<=OW;x+=125,k++) ops.push(tine(x,0,0,1,(k%2?1:-1)*44,40));
+  return ops;
+}
+function paint(cv,ops){
+  const w=cv.width,h=cv.height,ctx=cv.getContext('2d'),img=ctx.createImageData(w,h),d=img.data;
+  const s=Math.min(OW/w,OH/h),ox=(OW-w*s)/2,oy=(OH-h*s)/2,n=ops.length;
+  for(let py=0,j=0;py<h;py++)for(let px=0;px<w;px++,j+=4){
+    let x=ox+px*s,y=oy+py*s,c=BASE;
+    for(let i=n-1;i>=0;i--){const o=ops[i];
+      if(o.t===0){const dx=x-o.x,dy=y-o.y,d2=dx*dx+dy*dy; if(d2<o.r2){c=o.c;break} if(d2>225*o.r2) continue; /* shortcut: far drops move a point < r/30 units; skipped for speed */ const k=Math.sqrt(1-o.r2/d2); x=o.x+dx*k; y=o.y+dy*k}
+      else{const dd=Math.abs((x-o.x)*o.nx+(y-o.y)*o.ny),m=o.a*o.l/(dd+o.l); x-=o.mx*m; y-=o.my*m}}
+    d[j]=c[0];d[j+1]=c[1];d[j+2]=c[2];d[j+3]=255;
+  }
+  ctx.putImageData(img,0,0);
+}
+const abriCache={};
+function abriURL(seed){if(!abriCache[seed]){const c=document.createElement('canvas');c.width=180;c.height=225;paint(c,abriOps(seed));abriCache[seed]=c.toDataURL('image/png')}return abriCache[seed]}
+const hero=$('#marble'); let heroOps=abriOps(1405),heroSeed=1405,queued=false,sharpT,inkI=0;
+function drawHero(fast){ if(queued) return; queued=true; requestAnimationFrame(()=>{queued=false;
+  const b=hero.getBoundingClientRect(); if(!b.width) return;
+  const k=fast?.34:Math.min(1,380/b.width); hero.width=Math.round(b.width*k); hero.height=Math.round(b.height*k); paint(hero,heroOps);
+  clearTimeout(sharpT); if(fast) sharpT=setTimeout(()=>drawHero(false),220)})}
+function toOp(e){const b=hero.getBoundingClientRect(),w=hero.width,h=hero.height,s=Math.min(OW/w,OH/h);return[(OW-w*s)/2+(e.clientX-b.left)/b.width*w*s,(OH-h*s)/2+(e.clientY-b.top)/b.height*h*s]}
+let last=null,moved=false;
+hero.addEventListener('pointerdown',e=>{last=toOp(e);moved=false;hero.setPointerCapture(e.pointerId);pauseHero(true)});
+hero.addEventListener('pointermove',e=>{if(!last) return; const p=toOp(e),dx=p[0]-last[0],dy=p[1]-last[1],dist=Math.hypot(dx,dy); if(dist<16) return;
+  moved=true; heroOps.push(tine(last[0],last[1],dx,dy,Math.min(130,dist*1.3),26)); last=p; if(heroOps.length>460){heroSeed++;heroOps=abriOps(heroSeed)} drawHero(true)});
+hero.addEventListener('pointerup',e=>{if(last&&!moved){const p=toOp(e);heroOps.push(drop(p[0],p[1],46,INKS[inkI++%INKS.length]));drawHero(true)} last=null});
+hero.addEventListener('pointercancel',()=>{last=null});
+new ResizeObserver(()=>drawHero(false)).observe(hero);
+setTimeout(()=>paint($('#marble2'),abriOps(31)),400);
+
+/* ================= product illustrations ================= */
+let uid=0;
+const sh=(cx=150,cy=262,rx=96)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="12" fill="#000" opacity=".22" filter="url(#soft)"/>`;
+function book(c1,c2,{over='',band=true,label='',ribbon=true,w=128,h=196,x=88,y=50}={}){
+  return `${sh()}
+  <rect x="${x+10}" y="${y+6}" width="${w}" height="${h}" rx="6" fill="url(#pageEdge)"/>
+  <path d="M${x+w+6} ${y+14}v${h-16}M${x+w+3} ${y+12}v${h-12}" stroke="#D3C9B5" stroke-width=".8"/>
+  <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="7" fill="${c1}"/>
+  ${over?`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="7" fill="${over}"/>`:''}
+  <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="7" fill="url(#lit)"/>
+  <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="7" fill="url(#litV)"/>
+  <rect x="${x+12}" y="${y}" width="1.2" height="${h}" fill="#000" opacity=".22"/>
+  ${band?`<rect x="${x+w-24}" y="${y-1}" width="7" height="${h+2}" fill="${c2}"/><rect x="${x+w-24}" y="${y-1}" width="7" height="${h+2}" fill="url(#cyl)"/>`:''}
+  ${label}
+  ${ribbon?`<path d="M${x+w/2-4} ${y+h}v22l6-6 6 6v-22" fill="${c2}"/>`:''}`;
+}
+function art(p,big){
+  const {c1,c2}=p; let g='';
+  switch(p.kind){
+  case 'leather': g=book(c1,c2,{over:'url(#pGrain)',label:`<rect x="118" y="96" width="66" height="40" rx="3" fill="none" stroke="url(#gold)" stroke-width="1.6"/><text x="151" y="122" text-anchor="middle" font-family="Bodoni Moda,serif" font-size="13" letter-spacing="2" fill="url(#gold)">NAGHSH</text>`});break;
+  case 'cloth': g=book(c1,c2,{over:'url(#pWeave)',band:false,label:`<rect x="112" y="150" width="76" height="36" rx="3" fill="#F6F1E6"/><path d="M122 162h56M122 172h36" stroke="${c1}" stroke-width="2"/>`});break;
+  case 'lined': g=book(c1,c2,{over:'url(#pGrain)',label:`<rect x="104" y="70" width="96" height="120" fill="url(#pLines)" opacity=".9"/><rect x="104" y="70" width="96" height="120" fill="none" stroke="${c2}" stroke-opacity=".3"/>`});break;
+  case 'dots': g=book(c1,c2,{over:'url(#pDots)',label:`<rect x="116" y="176" width="64" height="30" rx="2" fill="#F6F1E6"/><text x="148" y="196" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" fill="${c1}">1406</text>`});break;
+  case 'tazhib': g=book(c1,c2,{band:false,label:`<rect x="98" y="60" width="108" height="176" rx="3" fill="none" stroke="url(#gold)" stroke-width="2.2"/><rect x="104" y="66" width="96" height="164" rx="2" fill="url(#pTaz)" opacity=".35"/><rect x="104" y="66" width="96" height="164" rx="2" fill="none" stroke="url(#gold)" stroke-width=".8"/><use href="#shamseh" x="112" y="108" width="80" height="80"/>`,ribbon:true});break;
+  case 'postcards': g=`${sh()}${[[-14,96],[0,150],[13,204]].map(([r,x],i)=>`<g transform="rotate(${r} ${x} 170)"><rect x="${x-58}" y="88" width="116" height="160" rx="4" fill="${i===1?'#1D2C4A':c1}" stroke="#000" stroke-opacity=".08"/><rect x="${x-50}" y="96" width="100" height="144" rx="2" fill="none" stroke="url(#gold)" stroke-width="1.4"/><use href="#shamseh" x="${x-30}" y="138" width="60" height="60"/></g>`).join('')}`;break;
+  case 'abri': { const id='ac'+(uid++); g=`${sh()}<rect x="76" y="64" width="150" height="190" fill="#F4F0E8" transform="rotate(-8 150 160)" stroke="#000" stroke-opacity=".08"/><defs><clipPath id="${id}"><rect x="80" y="52" width="150" height="196" transform="rotate(5 150 160)"/></clipPath></defs><image href="${abriURL(p.code.length*7+3)}" x="60" y="36" width="190" height="238" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id})"/><rect x="80" y="52" width="150" height="196" fill="url(#litV)" transform="rotate(5 150 160)"/>`;break;}
+  case 'flor': g=`${sh()}<rect x="70" y="70" width="150" height="182" fill="#E9DFCF" transform="rotate(-9 150 160)" stroke="#000" stroke-opacity=".08"/><rect x="82" y="56" width="150" height="194" fill="${c1}" transform="rotate(5 150 160)"/><rect x="82" y="56" width="150" height="194" fill="url(#pLily)" transform="rotate(5 150 160)" opacity=".95"/><rect x="82" y="56" width="150" height="194" fill="url(#litV)" transform="rotate(5 150 160)"/>`;break;
+  case 'pen': g=`${sh()}<g transform="rotate(-38 150 150)"><rect x="137" y="34" width="26" height="126" rx="12" fill="${c1}"/><rect x="137" y="34" width="26" height="126" rx="12" fill="url(#cyl)"/><rect x="137" y="148" width="26" height="86" rx="11" fill="${c1}"/><rect x="137" y="148" width="26" height="86" rx="11" fill="url(#cyl)"/><rect x="137" y="148" width="26" height="8" fill="url(#gold)"/><rect x="146" y="42" width="5" height="82" rx="2.5" fill="url(#gold)"/><circle cx="150" cy="38" r="5" fill="url(#gold)"/><path d="M140 234h20l-4 16-6 16-6-16z" fill="url(#gold)"/><path d="M150 240v22" stroke="${c1}" stroke-width="1.1"/><circle cx="150" cy="243" r="1.8" fill="${c1}"/></g>`;break;
+  case 'reeds': g=`${sh()}${[[-24,112],[-12,130],[0,148],[12,166],[24,184]].map(([r,x],i)=>`<g transform="rotate(${r} ${x} 165)"><rect x="${x-5.5}" y="${50+i*3}" width="11" height="196" rx="4" fill="${c1}"/><rect x="${x-5.5}" y="${50+i*3}" width="11" height="196" rx="4" fill="url(#cyl)"/><path d="M${x-5.5} ${50+i*3}h11l-5.5-24z" fill="${c2}"/><path d="M${x-5.5} ${116+i*3}h11M${x-5.5} ${188+i*3}h11" stroke="${c2}" stroke-width="1.5" opacity=".55"/></g>`).join('')}`;break;
+  case 'ink': g=`${sh()}<rect x="102" y="112" width="96" height="148" rx="18" fill="${c1}"/><rect x="102" y="112" width="96" height="148" rx="18" fill="url(#cyl)"/><rect x="129" y="80" width="42" height="38" rx="5" fill="${c1}"/><rect x="123" y="56" width="54" height="30" rx="6" fill="url(#gold)"/><rect x="116" y="160" width="68" height="62" rx="3" fill="${c2}"/><text x="150" y="186" text-anchor="middle" font-family="Bodoni Moda,serif" font-size="11" letter-spacing="2" fill="${c1}">NAGHSH</text><path d="M128 198h44M136 208h28" stroke="${c1}" stroke-width="1.5"/>`;break;
+  case 'washi': g=`${sh()}${[[110,200,c1,'url(#pFlor)'],[178,186,c2,''],[148,132,'#E0A93F','url(#pDots)']].map(([cx,cy,c,pat])=>`<g><circle cx="${cx}" cy="${cy}" r="44" fill="${c}"/>${pat?`<circle cx="${cx}" cy="${cy}" r="44" fill="${pat}" opacity=".6"/>`:''}<circle cx="${cx}" cy="${cy}" r="44" fill="url(#lit)"/><circle cx="${cx}" cy="${cy}" r="26" fill="#EDE5D6"/><circle cx="${cx}" cy="${cy}" r="22" fill="none" stroke="#000" stroke-opacity=".12"/></g>`).join('')}<path d="M196 214l58 18-6 18-58-18z" fill="${c2}" opacity=".85"/>`;break;
+  case 'envelope': g=`${sh()}<rect x="74" y="92" width="160" height="110" rx="4" fill="${c1}" transform="rotate(-8 154 147)"/><g transform="rotate(4 156 170)"><rect x="70" y="120" width="172" height="118" rx="4" fill="${c1}"/><rect x="70" y="120" width="172" height="118" rx="4" fill="url(#pGrain)"/><path d="M70 120l86 62 86-62" fill="${c1}" stroke="#000" stroke-opacity=".18"/><rect x="70" y="120" width="172" height="118" rx="4" fill="url(#litV)"/><circle cx="156" cy="182" r="9" fill="${c2}"/><circle cx="156" cy="210" r="7" fill="${c2}"/><path d="M156 182c-14 8 12 18 0 28" stroke="#F1E6D2" stroke-width="1.4" fill="none"/></g>`;break;
+  case 'seal': g=`${sh(160,262,90)}<ellipse cx="194" cy="236" rx="44" ry="15" fill="${c2}"/><circle cx="194" cy="230" r="30" fill="${c2}"/><circle cx="194" cy="230" r="30" fill="url(#lit)"/><circle cx="194" cy="230" r="20" fill="none" stroke="#000" stroke-opacity=".25" stroke-width="2"/><text x="194" y="238" text-anchor="middle" font-family="Bodoni Moda,serif" font-size="22" fill="#000" fill-opacity=".3">N</text><g transform="rotate(-22 110 150)"><path d="M98 46c-15 0-19 24-11 42l8 72h30l8-72c8-18 4-42-11-42z" fill="${c1}"/><path d="M98 46c-15 0-19 24-11 42l8 72h30l8-72c8-18 4-42-11-42z" fill="url(#cyl)"/><rect x="92" y="160" width="42" height="16" rx="3" fill="url(#gold)"/><rect x="96" y="176" width="34" height="42" rx="4" fill="url(#gold)"/></g>`;break;
+  case 'box': g=`${sh()}<rect x="72" y="118" width="156" height="132" rx="4" fill="${c1}"/><rect x="72" y="118" width="156" height="132" rx="4" fill="url(#pGrain)"/><rect x="72" y="118" width="156" height="132" rx="4" fill="url(#lit)"/><rect x="64" y="98" width="172" height="32" rx="4" fill="${c1}"/><rect x="64" y="98" width="172" height="32" rx="4" fill="url(#litV)"/><path d="M150 98v152M72 176h156" stroke="#E6D7BD" stroke-width="3"/><path d="M150 98c-20-30-50-14-30 0zM150 98c20-30 50-14 30 0z" fill="none" stroke="${c2}" stroke-width="5" stroke-linejoin="round"/><rect x="164" y="196" width="46" height="30" rx="2" fill="#FBF7EE" transform="rotate(-6 187 211)"/>`;break;
+  case 'writerbox': g=`${sh()}<rect x="64" y="122" width="172" height="130" rx="5" fill="${c1}"/><rect x="64" y="122" width="172" height="130" rx="5" fill="url(#pWeave)"/><rect x="64" y="122" width="172" height="130" rx="5" fill="url(#lit)"/><rect x="58" y="100" width="184" height="34" rx="5" fill="${c1}"/><rect x="58" y="100" width="184" height="34" rx="5" fill="url(#litV)"/><rect x="141" y="100" width="18" height="152" fill="url(#gold)"/><rect x="64" y="176" width="172" height="14" fill="url(#gold)"/><path d="M150 100c-30-40-64-20-38 0zM150 100c30-40 64-20 38 0z" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linejoin="round"/><use href="#shamseh" x="186" y="200" width="40" height="40"/>`;break;
+  case 'wrap': g=`${sh()}<rect x="60" y="150" width="200" height="94" fill="url(#pFlor)" transform="rotate(-6 160 197)"/><rect x="60" y="150" width="200" height="94" fill="url(#litV)" transform="rotate(-6 160 197)"/><g transform="rotate(-20 150 120)"><rect x="70" y="86" width="160" height="58" fill="url(#pFlor)"/><rect x="70" y="86" width="160" height="58" fill="url(#litV)"/><ellipse cx="230" cy="115" rx="10" ry="29" fill="#E8DCCB"/><ellipse cx="230" cy="115" rx="4" ry="11" fill="#B9A58A"/></g>`;break;
+  }
+  return `<svg class="art" viewBox="0 0 300 300" role="img" aria-label="${nm(p).replace(/["«»“”]/g,'')}">${g}</svg>`;
+}
+const tint=p=>p.kind==='abri'?'#C69A48':p.c1;
+
+/* ================= rendering ================= */
+const count=c=>c==='all'?P.length:P.filter(p=>p.cat===c).length;
+function renderStatic(){
+  $('#trust').innerHTML=[['M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-.01M17 19a2 2 0 1 0 0-.01','tr1'],['M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7c-2-4-6-4-6-1s6 1 6 1zm0 0c2-4 6-4 6-1s-6 1-6 1z','tr2'],['M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6','tr3'],['M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6zM9 12l2 2 4-4','tr4']].map(([d,k])=>`<div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg><span><b>${t(k+'b')}</b><span>${t(k+'s')}</span></span></div>`).join('');
+  const ART={tazhib:byId('tz201'),notebooks:byId('nb104'),writing:byId('wr301'),stationery:byId('st361'),gifts:byId('gf420')};
+  $('#bento').innerHTML=['tazhib','notebooks','writing','stationery','gifts'].map((c,i)=>`<button class="tile" type="button" data-filter="${c}"${i?` style="background:color-mix(in srgb,${ART[c].c1} 12%,var(--surface))"`:''}>
+    <div><span class="lat">${CAT_LAT[c]}</span><h3>${t('c_'+c)}</h3>${i===0?`<p>${t('cd_tazhib')}</p>`:''}</div>
+    <span class="go"><i>${ARROW}</i>${t('items',{n:nf(count(c))})}</span><span class="art" aria-hidden="true">${art(ART[c])}</span></button>`).join('');
+  $('#megaCats').innerHTML=['all',...CATS].map(c=>`<li><button type="button" data-filter="${c}"><span>${t('c_'+c)}</span><small class="num">${nf(count(c))}</small></button></li>`).join('');
+  $('#megaPicks').innerHTML=PICKS.map(id=>{const p=byId(id);return `<li><button type="button" data-open="${id}"><span>${nm(p)}</span><small class="mono">${p.code}</small></button></li>`}).join('');
+  $('#marq').innerHTML=[...t('marq'),...t('marq')].map(w=>`<span>${w}</span>`).join('');
+  $('#heroBook').innerHTML=art(byId('nb101')); $('#heroTaz').innerHTML=art(byId('tz201'));
+  const stack=`<svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="500" fill="url(#pGrain)"/>${[0,1,2,3,4,5].map(i=>`<g transform="rotate(${-10+i*4} 200 300)"><rect x="${88+i*2}" y="${150+i*14}" width="224" height="300" rx="3" fill="${i===5?'#FFFFFF':i%2?'#F7F3EC':'#EFE8DC'}" stroke="#000" stroke-opacity=".06"/></g>`).join('')}<g transform="rotate(10 200 300)"><path d="M128 260h140M128 284h120M128 308h140M128 332h90" stroke="#141312" stroke-opacity=".75" stroke-width="5" stroke-linecap="round"/><rect x="128" y="360" width="140" height="56" rx="4" fill="#D7263D" opacity=".9"/></g></svg>`;
+  $('#heroGift').innerHTML=art(byId('gf420')); $('#svHeroArt').innerHTML=stack;
+  $('#doorList').innerHTML=SVCS.map(([k,,d])=>`<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>${t('sv')[k][0]}</li>`).join('');
+  const faq=(arr,el)=>{$(el).innerHTML=arr.map(([q,a],i)=>`<details${i===0?' open':''}><summary><span class="mono">${String(i+1).padStart(2,'0')}</span><span>${q}</span><i aria-hidden="true"></i></summary><p>${a}</p></details>`).join('')};
+  faq(t('fq'),'#faqShop'); faq(t('fqs'),'#faqSvc');
+  $('#ftShop').innerHTML=CATS.map(c=>`<li><button class="lnk" type="button" data-filter="${c}">${t('c_'+c)}</button></li>`).join('');
+  $('#ftSvc').innerHTML=SVCS.map(([k])=>`<li><a href="#quote">${t('sv')[k][0]}</a></li>`).join('');
+  $('#svcGrid').innerHTML=SVCS.map(([k,price,d],i)=>`<article class="svc"><div class="top"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg></i><span class="mono">0${i+1}</span></div><span class="lat">${({bw:'B&W PRINT',color:'COLOR PRINT',glossy:'GLOSSY',label:'LABEL',lam:'LAMINATION',flyer:'FLYER'})[k]}</span><h3>${t('sv')[k][0]}</h3><p>${t('sv')[k][1]}</p><div class="foot"><span><small>${t('from')}</small> <b class="num">${nf(price)}</b> <small>${t('toman')}</small></span><button type="button" data-svc="${k}">${t('order')} ${ARROW}</button></div></article>`).join('');
+  $('#b2bList').innerHTML=t('b2b').map(s=>`<li>${CHECK}<span>${s}</span></li>`).join('');
+  const seg=(el,name,opts,cur)=>{$(el).innerHTML=opts.map(([v,label,sub])=>`<label><input type="radio" name="${name}" value="${v}"${v===cur?' checked':''}><span>${label}${sub?`<small>${sub}</small>`:''}</span></label>`).join('')};
+  seg('#qType','type',[['bw',t('t_bw'),'B&W'],['color',t('t_color'),'COLOR'],['glossy',t('t_glossy'),'GLOSSY']],qs.type);
+  seg('#qSize','size',[['A5','A5'],['A4','A4'],['A3','A3']],qs.size);
+  seg('#qSides','sides',[['single',t('sd_single')],['duplex',t('sd_duplex')]],qs.sides);
+  seg('#qBind','bind',[['none',t('b_none')],['staple',t('b_staple'),nf(5000)],['spiral',t('b_spiral'),nf(35000)],['perfect',t('b_perfect'),nf(60000)]],qs.bind);
+  if(!$('#qFile').files[0]) $('#fileName').textContent=t('qFile');
+}
+let ptSize='A4';
+function renderTable(){
+  $('#ptSize').innerHTML=['A5','A4','A3'].map(s=>`<button type="button" data-pt="${s}" aria-pressed="${s===ptSize}">${s}</button>`).join('');
+  $('#ptHeadRow').innerHTML=`<tr><th>${t('ptType')}</th>${t('rng').map((r,i)=>`<th${i===3?' class="bestcol"':''}>${r}${i===3?`<span>${t('best')}</span>`:''}</th>`).join('')}</tr>`;
+  $('#ptBody').innerHTML=['bw','color','glossy'].map(k=>`<tr><td><b>${t('t_'+k)}</b><small class="lat">${({bw:'B&W',color:'COLOR',glossy:'GLOSSY'})[k]} · ${ptSize}</small></td>${PT[ptSize][k].map((v,i)=>`<td class="num${i===3?' bestcol':''}">${nf(v)}</td>`).join('')}</tr>`).join('');
+}
+function renderSide(){
+  $('#side').innerHTML=['all',...CATS].map(c=>`<button type="button" data-cat="${c}" aria-pressed="${c===filter}"><span class="lat">${CAT_LAT[c]}</span><b>${t('c_'+c)}</b><span class="mono">${String(count(c)).padStart(2,'0')}</span></button>`).join('');
+  $('#chips').innerHTML=['all',...CATS].map(c=>`<button type="button" data-cat="${c}" aria-pressed="${c===filter}">${t('c_'+c)}</button>`).join('');
+  $('#wishOnly').setAttribute('aria-pressed',wishOnly);
+}
+function card(p){
+  const fl={new:['f_new',''],best:['f_best','red'],hand:['f_hand',''],ltd:['f_ltd','red']}[p.flag];
+  return `<article class="card"><div class="pic" style="--tint:${tint(p)}">
+    <button class="open" type="button" data-open="${p.id}" aria-label="${nm(p).replace(/"/g,'')}">${art(p)}</button>
+    ${fl?`<span class="flag ${fl[1]}">${t(fl[0])}</span>`:''}
+    <button class="ibtn heart" type="button" data-wish="${p.id}" aria-pressed="${wish.includes(p.id)}" aria-label="${t('wishlist')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+    <button class="btn dark quick" type="button" data-add="${p.id}" aria-label="${t('add')}: ${nm(p).replace(/"/g,'')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="transform:none"><path d="M12 5v14M5 12h14"/></svg><span>${t('add')}</span></button></div>
+    <div class="meta"><span class="lat">${p.lat}</span><span class="mono">${p.code}</span></div>
+    <h3>${nm(p)}</h3><p class="price num">${nf(p.price)} <small>${t('toman')}</small></p></article>`;
+}
+function renderGrid(){
+  let list=P.filter(p=>(filter==='all'||p.cat===filter)&&(!wishOnly||wish.includes(p.id)));
+  if(sort==='asc') list.sort((a,b)=>a.price-b.price); else if(sort==='desc') list.sort((a,b)=>b.price-a.price); else if(sort==='new') list.sort((a,b)=>b.age-a.age);
+  $('#resCount').textContent=t('showing',{n:nf(list.length)});
+  $('#grid').innerHTML=list.length?list.map(card).join(''):`<div class="empty-state">${t(wishOnly?'noWish':'noRes')}</div>`;
+}
+function setFilter(c,scroll){filter=c;renderSide();renderGrid();$('#megaWrap').classList.remove('open');if(document.activeElement&&$('#mega').contains(document.activeElement)) document.activeElement.blur();
+  if(scroll){ if(location.hash!=='#collection') location.hash='collection'; else $('#collection').scrollIntoView({behavior:'smooth'}) } }
+
+/* ================= quote ================= */
+const qv=()=>({...qs,pages:+$('#qPages').value,copies:+$('#qCopies').value});
+function renderQuote(){
+  const v=qv(), q=quote(v);
+  $('#sTier').textContent=t('sTier',{a:nf(q.tier+1)});
+  $('#sType').textContent=`${t('t_'+v.type)} · ${v.size}`;
+  $('#sPages').textContent=nf(q.total); $('#sSheets').textContent=nf(q.sheets);
+  $('#sUnit').textContent=money(q.unit)+(v.sides==='duplex'?' −۱۰٪'.replace('۱۰',lang==='fa'?'۱۰':'10'):'');
+  $('#sBind').textContent=q.bindCost?money(q.bindCost):'—';
+  $('#sTotal').textContent=money(q.price);
+  $('#sUp').innerHTML=q.next?t('sUp',{n:nf(q.next.need),p:money(q.next.unit)}):t('sBest');
+}
+$('#qForm').addEventListener('change',e=>{if(e.target.name&&e.target.name in qs){qs[e.target.name]=e.target.value} renderQuote()});
+$('#qForm').addEventListener('input',renderQuote);
+$('#qForm').addEventListener('click',e=>{const b=e.target.closest('[data-step]'); if(!b) return; const inp=$('#'+b.dataset.step); inp.value=Math.max(1,(+inp.value||0)+ +b.dataset.d); renderQuote()});
+const fileIn=$('#qFile'), dropZ=$('#drop');
+fileIn.addEventListener('change',()=>{$('#fileName').textContent=fileIn.files[0]?.name||t('qFile')});
+['dragenter','dragover'].forEach(ev=>dropZ.addEventListener(ev,e=>{e.preventDefault();dropZ.classList.add('over')}));
+['dragleave','drop'].forEach(ev=>dropZ.addEventListener(ev,e=>{e.preventDefault();dropZ.classList.remove('over')}));
+dropZ.addEventListener('drop',e=>{const f=e.dataTransfer.files[0]; if(f){$('#fileName').textContent=f.name}});
+const validPhone=v=>/^09\d{9}$/.test(v.replace(/[\s-]/g,'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
+$('#qAdd').addEventListener('click',()=>{
+  const c=$('#qContact'), err=$('#qErr');
+  if(c.hidden){c.hidden=false;$('#qName').focus();return}
+  if(!$('#qName').value.trim()||!validPhone($('#qPhone').value)){err.hidden=false;err.textContent=t('errPhone');return}
+  err.hidden=true; const v=qv(),q=quote(v);
+  jobs.push({id:'job'+Date.now(),v,price:q.price}); saveCart(); toast(t('qAdded'),true);
+});
+$('#svcGrid').addEventListener('click',e=>{const b=e.target.closest('[data-svc]'); if(!b) return; const k=b.dataset.svc; if(PT.A4[k]){qs.type=k; const r=$(`#qType input[value="${k}"]`); if(r) r.checked=true; renderQuote()} location.hash='quote'});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-pt]'); if(b){ptSize=b.dataset.pt;renderTable()}});
+
+/* ================= quick view ================= */
+const qvD=$('#qv');
+function openProduct(id){
+  const p=byId(id); let q=1; $('#search').open&&$('#search').close();
+  qvD.innerHTML=`<div class="in"><div class="pic" style="--tint:${tint(p)}">${art(p,true)}</div><div class="body">
+    <div class="meta" style="display:flex;justify-content:space-between"><span class="lat" style="color:var(--ink-3)">${p.lat}</span><span class="mono" style="color:var(--red)">${p.code}</span></div>
+    <h2>${nm(p)}</h2><p class="price num">${money(p.price)}</p><p class="muted">${desc(p)}</p>
+    <div class="specs"><span>${t('qvSpec')}</span><b>${spec(p)}</b><span>${t('qvCat')}</span><b>${t('c_'+p.cat)}</b><span>${t('qvCode')}</span><b class="mono">${p.code}</b></div>
+    <div class="rowb"><div class="qty"><button type="button" data-q="-1" aria-label="−">−</button><output class="num" id="qvq">${nf(1)}</output><button type="button" data-q="1" aria-label="+">+</button></div>
+    <button class="btn dark" type="button" id="qvAdd" style="flex:1">${t('add')}</button>
+    <button class="ibtn heart" style="position:static;border:1px solid var(--line-2);width:52px;height:52px" type="button" data-wish="${p.id}" aria-pressed="${wish.includes(p.id)}" aria-label="${t('wishlist')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
+    <div class="perks">${['perk1','perk2','perk3'].map(k=>`<div>${CHECK}<span>${t(k)}</span></div>`).join('')}</div>
+  </div></div><button class="ibtn x" type="button" data-x aria-label="${t('close')}">${X}</button>`;
+  qvD.onclick=e=>{ if(e.target===qvD||e.target.closest('[data-x]')) return qvD.close();
+    const b=e.target.closest('[data-q]'); if(b){q=Math.max(1,Math.min(20,q+ +b.dataset.q));$('#qvq').textContent=nf(q)}
+    if(e.target.closest('#qvAdd')){addToCart(id,q);qvD.close()} };
+  qvD.showModal();
+}
+
+/* ================= cart ================= */
+const drawer=$('#drawer'); let step='cart';
+const FREE=2000000;
+const itemCount=()=>Object.values(cart).reduce((a,b)=>a+b,0)+jobs.length;
+const subtotal=()=>Object.entries(cart).reduce((s,[id,q])=>s+(byId(id)?.price||0)*q,0)+jobs.reduce((s,j)=>s+j.price,0);
+const jobLabel=j=>t('jobName',{type:t('t_'+j.v.type),size:j.v.size,pages:nf(j.v.pages),copies:nf(j.v.copies)});
+function saveCart(){ for(const k in cart) if(!byId(k)||cart[k]<1) delete cart[k]; store.set('nk-cart',cart); store.set('nk-jobs',jobs);
+  $('#cartCount').textContent=nf(itemCount()); if(drawer.open) renderDrawer() }
+function saveWish(){ store.set('nk-wish',wish); const w=$('#wishCount'); w.hidden=!wish.length; w.textContent=nf(wish.length);
+  $$('[data-wish]').forEach(b=>b.setAttribute('aria-pressed',wish.includes(b.dataset.wish))); if(wishOnly) renderGrid() }
+function addToCart(id,q=1){cart[id]=(cart[id]||0)+q;saveCart();toast(t('added')+' · '+nm(byId(id)),true)}
+const code=()=>'NK-'+(lang==='fa'?'۱۴۰۵':'1405')+'-'+nf(1000+Math.floor(Math.random()*9000)).replace(/[,٬]/g,'');
+function renderDrawer(done){
+  const items=Object.entries(cart), st=subtotal();
+  const head=`<div class="dhead"><h2 id="drawerTitle">${step==='cart'?t('cartT'):t('coT')} ${step==='cart'&&itemCount()?`<span class="muted num" style="font-weight:500;font-size:14px">(${nf(itemCount())})</span>`:''}</h2><button class="ibtn" type="button" data-close aria-label="${t('close')}">${X}</button></div>`;
+  if(done){drawer.innerHTML=head+`<div class="dbody"><div class="empty"><p class="ok">${done}</p><button class="btn line" type="button" data-close>${t('goShop')}</button></div></div>`;return}
+  if(!items.length&&!jobs.length){drawer.innerHTML=head+`<div class="dbody"><div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><p>${t('empty')}</p><button class="btn dark" type="button" data-close data-go="collection">${t('goShop')}</button></div></div>`;return}
+  const pct=Math.min(100,st/FREE*100);
+  if(step==='cart'){
+    drawer.innerHTML=head+`<div class="dbody">${items.map(([id,q])=>{const p=byId(id);return `<div class="line"><div class="pic" style="--tint:${tint(p)}">${art(p)}</div><div><span class="mono" style="color:var(--red);font-size:10.5px">${p.code}</span><b>${nm(p)}</b><div class="rowb" style="margin-top:6px"><div class="qty sm"><button type="button" data-dq="${id}" data-d="-1" aria-label="−">−</button><output class="num">${nf(q)}</output><button type="button" data-dq="${id}" data-d="1" aria-label="+">+</button></div><button class="rm" type="button" data-rm="${id}">${t('remove')}</button></div></div><b class="num">${money(p.price*q)}</b></div>`}).join('')}
+      ${jobs.map(j=>`<div class="line"><div class="pic" style="--tint:#D7263D;display:grid;place-items:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M7 14h10v7H7z"/></svg></div><div><span class="mono" style="color:var(--red);font-size:10.5px">PRINT</span><b>${jobLabel(j)}</b><button class="rm" type="button" data-rmjob="${j.id}">${t('remove')}</button></div><b class="num">${money(j.price)}</b></div>`).join('')}</div>
+      <div class="dfoot"><div class="ship-bar"><span>${st>=FREE?t('shipFree'):t('shipLeft',{a:money(FREE-st)})}</span><i><b style="width:${pct}%"></b></i></div><div class="tot"><span>${t('subtotal')}</span><b class="num">${money(st)}</b></div><button class="btn dark block" type="button" data-step="checkout">${t('checkout')} ${ARROW}</button></div>`;
+  } else {
+    drawer.innerHTML=head+`<form class="dbody" id="coForm" novalidate style="display:grid;gap:14px;align-content:start;padding-block:18px">
+      <div class="field"><label for="co-name">${t('cName')}</label><input id="co-name" type="text" autocomplete="name"></div>
+      <div class="field"><label for="co-phone">${t('cPhone')}</label><input id="co-phone" type="tel" dir="ltr" autocomplete="tel" placeholder="09xx xxx xxxx"></div>
+      <div class="field"><label for="co-city">${t('city')}</label><input id="co-city" type="text" autocomplete="address-level2"></div>
+      <div class="field"><label for="co-addr">${t('address')}</label><textarea id="co-addr" rows="3" autocomplete="street-address"></textarea></div>
+      <p class="err" id="co-err" role="alert" hidden></p></form>
+      <div class="dfoot"><div class="tot"><span>${t('subtotal')}</span><b class="num">${money(st)}</b></div><button class="btn dark block" type="submit" form="coForm">${t('place')}</button><button class="btn line block" type="button" data-step="cart">${t('back')}</button></div>`;
+    $('#coForm').addEventListener('submit',e=>{e.preventDefault();
+      const ok=$('#co-name').value.trim()&&validPhone($('#co-phone').value)&&$('#co-city').value.trim()&&$('#co-addr').value.trim();
+      if(!ok){const er=$('#co-err');er.hidden=false;er.textContent=t('errForm');return}
+      const c=code(); cart={}; jobs=[]; step='cart'; saveCart(); renderDrawer(t('done',{c}));});
+  }
+}
+drawer.addEventListener('click',e=>{
+  if(e.target===drawer) return drawer.close();
+  const b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.close!==undefined){drawer.close(); if(b.dataset.go) location.hash=b.dataset.go; return}
+  if(b.dataset.step){step=b.dataset.step;renderDrawer();return}
+  if(b.dataset.rm){delete cart[b.dataset.rm];saveCart();return}
+  if(b.dataset.rmjob){jobs=jobs.filter(j=>j.id!==b.dataset.rmjob);saveCart();return}
+  if(b.dataset.dq){cart[b.dataset.dq]=Math.min(50,(cart[b.dataset.dq]||0)+ +b.dataset.d);saveCart()}
+});
+const openCart=()=>{step='cart';renderDrawer();if(!drawer.open) drawer.showModal()};
+$('#cartBtn').addEventListener('click',openCart);
+$('#wishBtn').addEventListener('click',()=>{wishOnly=true;setFilter('all',true)});
+
+/* ================= search & mobile menu ================= */
+const sD=$('#search');
+function renderRes(){const v=$('#q').value.trim().toLowerCase();
+  if(!v){$('#res').innerHTML=`<p class="hintx">${t('searchHint')}</p>`;return}
+  const r=P.filter(p=>[p.fa,p.en,p.code,p.lat,t('c_'+p.cat)].join(' ').toLowerCase().includes(v));
+  $('#res').innerHTML=r.length?r.map(p=>`<button type="button" data-open="${p.id}"><span class="pic" style="--tint:${tint(p)};display:grid;place-items:center">${art(p)}</span><span><b style="display:block">${nm(p)}</b><span class="mono" style="color:var(--red)">${p.code}</span></span><b class="num">${money(p.price)}</b></button>`).join(''):`<p class="hintx">${t('noRes')}</p>`}
+$('#searchBtn').addEventListener('click',()=>{renderRes();sD.showModal();$('#q').focus()});
+$('#q').addEventListener('input',renderRes);
+sD.addEventListener('click',e=>{if(e.target===sD||e.target.closest('[data-close-search]')) sD.close()});
+const mD=$('#mnav');
+$('#menuBtn').addEventListener('click',()=>{
+  mD.innerHTML=`<div class="dhead"><span class="logo" style="justify-items:start"><b style="font-size:20px">NAGHSH</b></span><button class="ibtn" type="button" data-mclose aria-label="${t('close')}">${X}</button></div>
+  <nav class="mnav">${['all',...CATS].map(c=>`<button type="button" data-filter="${c}" data-mclose>${t('c_'+c)}<small class="num">${nf(count(c))}</small></button>`).join('')}
+  <a href="#story" data-mclose>${t('navAbri')}</a><a href="#services" data-mclose>${t('navPrint')}<small class="lat">ONLINE PRINT</small></a><a href="#faq" data-mclose>${t('navFaq')}</a><a href="#contact" data-mclose>${t('ftContact')}</a></nav>
+  <div class="dfoot"><div class="seg-sm" style="justify-self:start"><button type="button" data-lang="fa" aria-pressed="${lang==='fa'}">فارسی</button><button type="button" data-lang="en" aria-pressed="${lang==='en'}">English</button></div></div>`;
+  mD.showModal()});
+mD.addEventListener('click',e=>{if(e.target===mD||e.target.closest('[data-mclose]')) mD.close()});
+
+/* ================= hero slider ================= */
+const slides=$$('.slide'), bars=$$('.bars button'), heroEl=$('#hero'); let cur=0;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function go(i){cur=(i+slides.length)%slides.length;
+  slides.forEach((s,k)=>{s.classList.toggle('on',k===cur);s.inert=k!==cur});
+  bars.forEach((b,k)=>{b.classList.remove('on');void b.offsetWidth;b.classList.toggle('on',k===cur);b.setAttribute('aria-selected',k===cur)});
+  $('#slideNo').textContent=pad(cur+1); if(cur===0) drawHero(false)}
+bars.forEach(b=>{b.addEventListener('click',()=>go(+b.dataset.go)); b.querySelector('i').addEventListener('animationend',()=>{if(!reduce) go(cur+1)})});
+$('#prev').addEventListener('click',()=>go(cur-1)); $('#next').addEventListener('click',()=>go(cur+1));
+let pauseLock=false; function pauseHero(lock){if(lock) pauseLock=true; heroEl.classList.add('paused')}
+heroEl.addEventListener('pointerenter',()=>pauseHero()); heroEl.addEventListener('pointerleave',()=>{if(!pauseLock) heroEl.classList.remove('paused')});
+heroEl.addEventListener('focusin',()=>pauseHero()); heroEl.addEventListener('focusout',()=>{if(!pauseLock) heroEl.classList.remove('paused')});
+if(reduce) heroEl.classList.add('paused');
+let sx=null; heroEl.addEventListener('touchstart',e=>{if(!e.target.closest('canvas')) sx=e.touches[0].clientX},{passive:true});
+heroEl.addEventListener('touchend',e=>{if(sx==null) return; const dx=e.changedTouches[0].clientX-sx; sx=null; if(Math.abs(dx)>50) go(cur+((dx>0)===(lang==='fa')?1:-1))});
+
+/* ================= global clicks ================= */
+let tt; function toast(msg,withCart){const el=$('#toast');el.innerHTML=`<span>${msg}</span>${withCart?`<button type="button" id="toastCart">${t('view')}</button>`:''}`;el.removeAttribute('data-off');clearTimeout(tt);tt=setTimeout(()=>el.setAttribute('data-off',''),2600)}
+document.addEventListener('click',e=>{
+  const el=e.target;
+  if(el.closest('#toastCart')){$('#toast').setAttribute('data-off','');openCart();return}
+  const cp=el.closest('[data-copy]'); if(cp){const v=cp.dataset.copy; const sel=()=>getSelection().selectAllChildren($('#phone')); try{navigator.clipboard.writeText(v).then(()=>toast(t('copied')),sel)}catch(_){sel()} return}
+  const lg=el.closest('[data-lang]'); if(lg){lang=lg.dataset.lang;store.set('nk-lang',lang);applyLang();mD.open&&mD.close();return}
+  const o=el.closest('[data-open]'); if(o){openProduct(o.dataset.open);return}
+  const a=el.closest('[data-add]'); if(a){addToCart(a.dataset.add);return}
+  const w=el.closest('[data-wish]'); if(w){const id=w.dataset.wish; wish=wish.includes(id)?wish.filter(x=>x!==id):[...wish,id]; saveWish(); return}
+  const c=el.closest('[data-cat]'); if(c){wishOnly=false;setFilter(c.dataset.cat,false);return}
+  const f=el.closest('[data-filter]'); if(f){wishOnly=false;setFilter(f.dataset.filter,true);return}
+});
+$('#wishOnly').addEventListener('click',()=>{wishOnly=!wishOnly;renderSide();renderGrid()});
+$('#sort').addEventListener('change',e=>{sort=e.target.value;renderGrid()});
+$('#megaBtn').addEventListener('click',()=>{const w=$('#megaWrap'),o=!w.classList.contains('open');w.classList.toggle('open',o);$('#megaBtn').setAttribute('aria-expanded',o)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape') $('#megaWrap').classList.remove('open'); if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('#searchBtn').click()}});
+$('#nlForm').addEventListener('submit',e=>{e.preventDefault();const ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('#nl-email').value.trim()),m=$('#nlMsg');m.hidden=false;m.textContent=t(ok?'nlOk':'nlErr');m.style.color=ok?'var(--ink)':'var(--red)'});
+
+/* ================= language ================= */
+function applyLang(){
+  const r=document.documentElement; r.lang=lang; r.dir=lang==='fa'?'rtl':'ltr';
+  $$('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
+  $$('[data-i18n-html]').forEach(el=>el.innerHTML=t(el.dataset.i18nHtml));
+  $$('[data-i18n-ph]').forEach(el=>el.placeholder=t(el.dataset.i18nPh));
+  $$('[data-i18n-aria]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.i18nAria)));
+  $$('.langs [data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang));
+  const ph=lang==='fa'?'۰۲۱-۶۶۲۷۰۳۴۲':'021-66270342'; $$('.topbar .contact .num,.call,#phone').forEach(el=>el.textContent=ph);
+  renderStatic(); renderTable(); renderSide(); renderGrid(); renderQuote(); saveCart(); saveWish(); $('#slideNo').textContent=pad(cur+1); $('#slideTot').textContent=pad(slides.length);
+  chrome();
+}
+// the header, tagline and top bar belong to whichever section is open: shop or services
+let view='shop';
+function chrome(){
+  $$('[data-for]').forEach(e=>e.hidden=e.dataset.for!==view);
+  $('header.site .logo small').textContent=t(view==='services'?'taglineSvc':'tagline');
+  $('.topbar .msg').textContent=t(view==='services'?'topMsgSvc':'topMsg');
+  $('header.site .logo').setAttribute('href','#'+view);
+}
+
+/* ================= routing: shop is the entry, services behind #services ================= */
+function route(){
+  const h=location.hash.slice(1), target=h&&document.getElementById(h);
+  // footer and #contact are shared, so they keep whichever section is already open
+  view=h==='services'||(target&&target.closest('[data-view="services"]'))?'services':(target&&!target.closest('[data-view]')?view:'shop');
+  const was=!$(`[data-view="${view}"]`).hidden;
+  $$('[data-view]').forEach(v=>v.hidden=v.dataset.view!==view);
+  chrome();
+  $('#megaWrap').classList.remove('open');
+  if(target&&h!=='services') requestAnimationFrame(()=>target.scrollIntoView({behavior:was?'smooth':'auto'}));
+  else if(!was||h==='shop'||h==='services') window.scrollTo({top:0,behavior:'auto'});
+  if(view==='shop'&&!was) drawHero(false);
+}
+addEventListener('hashchange',route);
+applyLang(); go(0); route();
+</script>
