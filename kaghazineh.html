@@ -1,10 +1,9 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Naghsh Paper Boutique</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..700&family=IBM+Plex+Mono:wght@400;500&family=Vazirmatn:wght@300..900&display=swap">
 <style>
 /* Layout: NAGHSH system (warm paper, ink, signal red). Shop-first: arched slider hero, trust row, category bento, sidebar catalogue, editorial abri story, print gateway; services as a second view with live tiered quote. */
 :root{
@@ -501,6 +500,9 @@ dialog[open]{animation:pop .35s var(--ease)}
 }
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} html{scroll-behavior:auto} }
 </style>
+<link rel="stylesheet" href="concept-preview.css">
+</head>
+<body class="boutique-preview">
 
 <!-- shared SVG paint: lighting, gold, textures, tazhib medallion -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -1308,3 +1310,4 @@ function route(){
 addEventListener('hashchange',route);
 applyLang(); go(0); route();
 </script>
+</body></html>

@@ -1,0 +1,12 @@
+@font-face{font-family:Vazirmatn;src:url(fonts/Vazirmatn.woff2) format("woff2");font-weight:100 900;font-display:swap}
+html body,html body *{font-family:Vazirmatn,sans-serif!important}html[dir=rtl] :is(h1,h2,h3){letter-spacing:normal!important}
+html body.boutique-preview{--bg:#f8efdf;--surface:#efe0cd;--surface-2:#e8d4bc;--card:#fff8e9;--ink:#382329;--ink-2:#644a48;--ink-3:#765654;--line:#8e64544c;--line-2:#8e64547d;--red:#994e3c;--gold:#a57745;--invert:#411e28;--on-invert:#fff4dd;--on-invert-2:#e8ccbd}
+html body.studio-preview{--bg:#f1f7f4;--bg-2:#e4efea;--bg-3:#d6e9e2;--card:#fafffd;--ink:#122e3a;--ink-2:#345665;--ink-3:#526d71;--line:#b1d0c4;--line-2:#91b3aa;--bar:#d3e5df;--bar-2:#e6f0eb;--red:#185a66;--red-2:#3077861a;--win:#f9fffb;--win-2:#e7f1ee;--lapis:#244d62;--gold:#ad7449}
+html body:is(.boutique-preview,.studio-preview){background-color:var(--bg);color:var(--ink)}
+html body.boutique-preview .hero{background:radial-gradient(ellipse at 80% 20%,var(--surface-2),var(--bg) 70%)}
+html body.studio-preview .hero{background:linear-gradient(120deg,var(--bg),var(--bg-2))}
+html body.boutique-preview :is(.card,.tile,.quote){border-radius:6px 6px 20px 6px}
+html body.studio-preview :is(.card,.tilep){border-radius:5px}
+html body.studio-preview :is(.hero,.sec) :is(h1,h2){font-weight:890}
+@media(prefers-color-scheme:dark){html body.boutique-preview{--bg:#261c1b;--surface:#342321;--surface-2:#432b28;--card:#332421;--ink:#fff2dd;--ink-2:#ead0c6;--ink-3:#d2b09c;--line:#94695899;--line-2:#ad7d65;--red:#b9654a;--gold:#d4a06f;--invert:#190e12;--on-invert:#fff4dd;--on-invert-2:#e8ccbd}
+html body.studio-preview{--bg:#132629;--bg-2:#193133;--bg-3:#243c3c;--card:#20383b;--ink:#ebf4f0;--ink-2:#c1d7d2;--ink-3:#aac4bd;--line:#456662;--line-2:#628a83;--bar:#d3e5df;--bar-2:#e6f0eb;--red:#176d78;--red-2:#7cbbc31a;--win:#f2faf5;--win-2:#d8e8e2;--lapis:#34596d;--gold:#e7a575}}
